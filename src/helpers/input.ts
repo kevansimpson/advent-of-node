@@ -1,5 +1,4 @@
 import * as fs from 'fs'
-import { Answer } from '../types/advent'
 
 export function readLines (file: string, cb: (lines: string[]) => void): void {
   const data: string[] = []
