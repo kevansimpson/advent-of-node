@@ -1,3 +1,6 @@
+/**
+ * @module 2018_day01
+ */
 import { Answer } from '../types/advent'
 
 export function sum (intArray: number[]): Answer {

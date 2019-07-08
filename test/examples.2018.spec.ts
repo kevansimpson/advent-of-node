@@ -2,10 +2,9 @@ import assert from 'assert';
 import 'mocha'
 import { findDuplicateFrequency, sum } from '../src/2018/day01'
 import { checksum, countPairsAndTriples, findPrototype } from '../src/2018/day02'
+import { Claim, buildClaimGrid, calculateOverlap, findAdjacentClaimId, parseClaim } from '../src/2018/day03'
 
 describe('2018 examples', function() {
-  this.slow(0)
-
   describe('Day 01', function() {
     it('should return correct sum', function() {
       assert.equal(sum([1, 1, 1]), 3)
@@ -35,6 +34,30 @@ describe('2018 examples', function() {
 
     it('should find prototype', function() {
       assert.equal(findPrototype(['abcde', 'fghij', 'klmno', 'pqrst', 'fguij', 'axcye', 'wvxyz']), 'fgij')
+    })
+  })
+
+  describe('Day 03', function() {
+    it('should parse Claim', function() {
+      const claim: Claim = parseClaim('#123 @ 3,2: 5x4')
+      assert.equal(claim.id, 123)
+      assert.equal(claim.left, 3)
+      assert.equal(claim.top, 2)
+      assert.equal(claim.width, 5)
+      assert.equal(claim.height, 4)
+      assert.equal(claim.points.length, 20)
+    })
+
+    const input: string[] = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
+    const claims: Claim[] = input.map(claim => parseClaim(claim))
+    const grid: Map<string, number[]> = buildClaimGrid(claims)
+
+    it('should calculate overlap', function() {
+      assert.equal(calculateOverlap(grid), 4)
+    })
+
+    it('should find adjacent Claim id', function() {
+      assert.equal(findAdjacentClaimId(grid, claims), 3)
     })
   })
 })

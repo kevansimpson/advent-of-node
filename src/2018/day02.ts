@@ -1,3 +1,6 @@
+/**
+ * @module 2018_day02
+ */
 import { Answer } from '../types/advent'
 
 export function checksum (input: string[]): Answer {

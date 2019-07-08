@@ -2,11 +2,6 @@
 
 export type Answer = string | number
 
-export type Solution = (input: any) => Answer
+export type Input = Answer | number[] | string[]
 
-// helper types
-
-export type Point = {
-  x: number,
-  y: number
-}
+export type Solution = (input: Input) => Answer
