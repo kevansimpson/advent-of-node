@@ -1,7 +1,7 @@
 /**
  * @module 2018_day03
  */
-import { Point } from '../helpers/point'
+import { key } from '../helpers/point'
 import { Answer } from '../types/advent'
 
 export type Claim = {
@@ -73,8 +73,10 @@ export function findAdjacentClaimId (grid: Grid): Answer {
   return -1
 }
 
+const regex: RegExp = new RegExp(/(\d+)/g)
+
 export function parseClaim (text: string): Claim {
-  const found: RegExpMatchArray | null = text.match(/(\d+)/g)
+  const found: RegExpMatchArray | null = text.match(regex)
 
   if (found) {
     const claim: Claim = {
@@ -97,7 +99,7 @@ function listPoints (left: number, top: number, width: number, height: number): 
   const points: string[] = []
   for (let y = -top; y > (-(height + top)); y--) {
     for (let x = left; x < (width + left); x++) {
-      points.push(Point.key(x, y))
+      points.push(key(x, y))
     }
   }
 
