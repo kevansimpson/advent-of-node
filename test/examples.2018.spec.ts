@@ -2,7 +2,7 @@ import assert from 'assert';
 import 'mocha'
 import { findDuplicateFrequency, sum } from '../src/2018/day01'
 import { checksum, countPairsAndTriples, findPrototype } from '../src/2018/day02'
-import { Claim, buildClaimGrid, calculateOverlap, findAdjacentClaimId, parseClaim } from '../src/2018/day03'
+import { Claim, Grid, buildClaimGrid, calculateOverlap, findAdjacentClaimId, parseClaim } from '../src/2018/day03'
 
 describe('2018 examples', function() {
   describe('Day 01', function() {
@@ -49,15 +49,15 @@ describe('2018 examples', function() {
     })
 
     const input: string[] = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
-    const claims: Claim[] = input.map(claim => parseClaim(claim))
-    const grid: Map<string, number[]> = buildClaimGrid(claims)
+    // const claims: Claim[] = input.map(claim => parseClaim(claim))
+    const grid: Grid = buildClaimGrid(input)
 
     it('should calculate overlap', function() {
-      assert.equal(calculateOverlap(grid), 4)
+      assert.equal(calculateOverlap(grid.map), 4)
     })
 
     it('should find adjacent Claim id', function() {
-      assert.equal(findAdjacentClaimId(grid, claims), 3)
+      assert.equal(findAdjacentClaimId(grid), 3)
     })
   })
 })

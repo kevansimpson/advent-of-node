@@ -7,7 +7,7 @@ import { findDuplicateFrequency, sum } from '../src/2018/day01'
 import * as d01 from '../src/2018/day01.doc'
 import { checksum, findPrototype } from '../src/2018/day02'
 import * as d02 from '../src/2018/day02.doc'
-import { Claim, buildClaimGrid, calculateOverlap, findAdjacentClaimId, parseClaim } from '../src/2018/day03'
+import { Grid, buildClaimGrid, calculateOverlap, findAdjacentClaimId } from '../src/2018/day03'
 import * as d03 from '../src/2018/day03.doc'
 
 describe('2018 solutions', function() {
@@ -39,14 +39,12 @@ describe('2018 solutions', function() {
 
   it('Day03', function(done) {
     readLines(path.join(testPath, 'input03.txt'), (input: string[]) => {
-      start('toClaims')
-      const claims: Claim[] = input.reverse().map(parseClaim)
-      end('toClaims', 'buildClaimGrid')
-      const grid: Map<string, number[]> = buildClaimGrid(claims)
+      start('buildClaimGrid')
+      const grid: Grid = buildClaimGrid(input.reverse())
       end('buildClaimGrid', 'calculateOverlap')
-      assert.strictEqual(calculateOverlap(grid), d03.part1)
+      assert.strictEqual(calculateOverlap(grid.map), d03.part1)
       end('calculateOverlap', 'findAdjacentClaimId')
-      assert.strictEqual(findAdjacentClaimId(grid, claims), d03.part2)
+      assert.strictEqual(findAdjacentClaimId(grid), d03.part2)
       end('findAdjacentClaimId')
       done()
     })

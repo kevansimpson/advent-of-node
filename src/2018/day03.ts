@@ -5,17 +5,30 @@ import { Point } from '../helpers/point'
 import { Answer } from '../types/advent'
 
 export type Claim = {
-  id: number,
-  left: number,
-  top: number,
-  width: number,
-  height: number,
+  id: number
+  left: number
+  top: number
+  width: number
+  height: number
   points: string[]
 }
 
-export function buildClaimGrid (claims: Claim[]): Map<string, number[]> {
+export class Grid {
+  map: Map<string, number[]>
+  claims: Claim[]
+
+  constructor (grid: Map<string, number[]>, claims?: Claim[]) {
+    this.map = grid
+    this.claims = claims || []
+  }
+}
+
+export function buildClaimGrid (claims: string[]): Grid {
   const grid: Map<string, number[]> = new Map()
-  claims.forEach(claim => {
+  const list: Claim[] = []
+  claims.forEach(str => {
+    const claim: Claim = parseClaim(str)
+    list.push(claim)
     claim.points.forEach(key => {
       const idList: number[] = grid.get(key) || []
       idList.push(claim.id)
@@ -23,7 +36,7 @@ export function buildClaimGrid (claims: Claim[]): Map<string, number[]> {
     })
   })
 
-  return grid
+  return new Grid(grid, list)
 }
 
 export function calculateOverlap (grid: Map<string, number[]>): Answer {
@@ -35,11 +48,11 @@ export function calculateOverlap (grid: Map<string, number[]>): Answer {
   return sum
 }
 
-export function findAdjacentClaimId (grid: Map<string, number[]>, claims: Claim[]): Answer {
+export function findAdjacentClaimId (grid: Grid): Answer {
   const points: string[] = []
   const exclude: Set<Number> = new Set()
 
-  for (let e of grid.entries()) {
+  for (let e of grid.map.entries()) {
     if (e[1].length === 1) {
       points.push(e[0])
     } else {
@@ -47,7 +60,7 @@ export function findAdjacentClaimId (grid: Map<string, number[]>, claims: Claim[
     }
   }
 
-  for (let claim of claims) {
+  for (let claim of grid.claims) {
     if (exclude.has(claim.id)) {
       continue
     }
@@ -62,15 +75,19 @@ export function findAdjacentClaimId (grid: Map<string, number[]>, claims: Claim[
 
 export function parseClaim (text: string): Claim {
   const found: RegExpMatchArray | null = text.match(/(\d+)/g)
+
   if (found) {
-    return {
+    const claim: Claim = {
       id: +found[0],
       left: +found[1],
       top: +found[2],
       width: +found[3],
       height: +found[4],
-      points: listPoints(+found[1], +found[2], +found[3], +found[4])
+      points: []
     }
+
+    claim.points = listPoints(claim.left, claim.top, claim.width, claim.height)
+    return claim
   }
 
   throw new Error(`Failed to parse claim: ${text}`)
