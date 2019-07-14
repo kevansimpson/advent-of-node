@@ -3,6 +3,7 @@ import 'mocha'
 import { findDuplicateFrequency, sum } from '../src/2018/day01'
 import { checksum, countPairsAndTriples, findPrototype } from '../src/2018/day02'
 import { Claim, Grid, buildClaimGrid, calculateOverlap, findAdjacentClaimId, parseClaim } from '../src/2018/day03'
+import { Guard, findSleepiestGuard, getSleepiestMinute, parseRecords, strategy1, strategy2 } from '../src/2018/day04'
 
 describe('2018 examples', function() {
   describe('Day 01', function() {
@@ -49,7 +50,6 @@ describe('2018 examples', function() {
     })
 
     const input: string[] = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
-    // const claims: Claim[] = input.map(claim => parseClaim(claim))
     const grid: Grid = buildClaimGrid(input)
 
     it('should calculate overlap', function() {
@@ -58,6 +58,40 @@ describe('2018 examples', function() {
 
     it('should find adjacent Claim id', function() {
       assert.equal(findAdjacentClaimId(grid), 3)
+    })
+  })
+
+  describe('Day 04', function() {
+    const input: string[] = [
+      '[1518-11-01 00:00] Guard #10 begins shift',
+      '[1518-11-01 00:05] falls asleep',
+      '[1518-11-01 00:25] wakes up',
+      '[1518-11-01 00:30] falls asleep',
+      '[1518-11-01 00:55] wakes up',
+      '[1518-11-01 23:58] Guard #99 begins shift',
+      '[1518-11-02 00:40] falls asleep',
+      '[1518-11-02 00:50] wakes up',
+      '[1518-11-03 00:05] Guard #10 begins shift',
+      '[1518-11-03 00:24] falls asleep',
+      '[1518-11-03 00:29] wakes up',
+      '[1518-11-04 00:02] Guard #99 begins shift',
+      '[1518-11-04 00:36] falls asleep',
+      '[1518-11-04 00:46] wakes up',
+      '[1518-11-05 00:03] Guard #99 begins shift',
+      '[1518-11-05 00:45] falls asleep',
+      '[1518-11-05 00:55] wakes up'
+    ]
+    const records = parseRecords(input.sort())
+
+    it('should return guardID * minute', function() {
+      const guard: Guard = findSleepiestGuard(records)
+      assert.equal(guard.id, 10)
+      assert.equal(getSleepiestMinute(guard), 24)
+      assert.equal(strategy1(records), 240)
+    })
+
+    it('should return alternate strategy', function() {
+      assert.equal(strategy2(records), 4455)
     })
   })
 })

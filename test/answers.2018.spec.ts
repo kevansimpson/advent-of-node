@@ -9,6 +9,8 @@ import { checksum, findPrototype } from '../src/2018/day02'
 import * as d02 from '../src/2018/day02.doc'
 import { Grid, buildClaimGrid, calculateOverlap, findAdjacentClaimId } from '../src/2018/day03'
 import * as d03 from '../src/2018/day03.doc'
+import { parseRecords, strategy1, strategy2 } from '../src/2018/day04'
+import * as d04 from '../src/2018/day04.doc'
 
 describe('2018 solutions', function() {
   const testPath = path.join(__dirname, 'resources/2018') 
@@ -46,6 +48,19 @@ describe('2018 solutions', function() {
       end('calculateOverlap', 'findAdjacentClaimId')
       assert.strictEqual(findAdjacentClaimId(grid), d03.part2)
       end('findAdjacentClaimId')
+      done()
+    })
+  })
+
+  it('Day04', function(done) {
+    readLines(path.join(testPath, 'input04.txt'), (input: string[]) => {
+      start('parseRecords')
+      const records = parseRecords(input.sort())
+      end('parseRecords', 'strategy1')
+      assert.strictEqual(strategy1(records), d04.part1)
+      end('strategy1', 'strategy2')
+      assert.strictEqual(strategy2(records), d04.part2)
+      end('strategy2')
       done()
     })
   })
