@@ -18,3 +18,10 @@ export function readNumbers (file: string, cb: (lines: number[]) => void): void 
     cb(lines.map((str: string) => +str))
   })
 }
+
+export function readString (file: string, cb: (input: string) => void): void {
+  fs.readFile(file, (err: Error | null, input: Buffer) => {
+    if (err) throw err
+    cb(input.toString('utf-8'))
+  })
+}

@@ -4,6 +4,7 @@ import { findDuplicateFrequency, sum } from '../src/2018/day01'
 import { checksum, countPairsAndTriples, findPrototype } from '../src/2018/day02'
 import { Claim, Grid, buildClaimGrid, calculateOverlap, findAdjacentClaimId, parseClaim } from '../src/2018/day03'
 import { Guard, findSleepiestGuard, getSleepiestMinute, parseRecords, strategy1, strategy2 } from '../src/2018/day04'
+import { buildReactionMap, formPolymer, improvePolymer } from '../src/2018/day05'
 
 describe('2018 examples', function() {
   describe('Day 01', function() {
@@ -92,6 +93,21 @@ describe('2018 examples', function() {
 
     it('should return alternate strategy', function() {
       assert.equal(strategy2(records), 4455)
+    })
+  })
+
+  describe('Day 05', function() {
+    const rxns: Map<string, string> = buildReactionMap()
+    it('should return polymer', function() {
+      assert.equal(formPolymer('aA', rxns), '')
+      assert.equal(formPolymer('abBA', rxns), '')
+      assert.equal(formPolymer('abAB', rxns), 'abAB')
+      assert.equal(formPolymer('aabAAB', rxns), 'aabAAB')
+      assert.equal(formPolymer('dabAcCaCBAcCcaDA', rxns), 'dabCBAcaDA')
+    })
+
+    it('should return improved polymer', function() {
+      assert.equal(improvePolymer('dabAcCaCBAcCcaDA', rxns), 'daDA')
     })
   })
 })

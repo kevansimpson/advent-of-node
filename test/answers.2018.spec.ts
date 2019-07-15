@@ -1,7 +1,7 @@
 import assert from 'assert'
 import 'mocha'
 import path from 'path'
-import { readLines, readNumbers } from '../src/helpers/input'
+import { readLines, readNumbers, readString } from '../src/helpers/input'
 import { answer, start, end } from '../src/helpers/util'
 import { findDuplicateFrequency, sum } from '../src/2018/day01'
 import * as d01 from '../src/2018/day01.doc'
@@ -11,6 +11,8 @@ import { Grid, buildClaimGrid, calculateOverlap, findAdjacentClaimId } from '../
 import * as d03 from '../src/2018/day03.doc'
 import { parseRecords, strategy1, strategy2 } from '../src/2018/day04'
 import * as d04 from '../src/2018/day04.doc'
+import { buildReactionMap, formPolymer, improvePolymer } from '../src/2018/day05'
+import * as d05 from '../src/2018/day05.doc'
 
 describe('2018 solutions', function() {
   const testPath = path.join(__dirname, 'resources/2018') 
@@ -61,6 +63,19 @@ describe('2018 solutions', function() {
       end('strategy1', 'strategy2')
       assert.strictEqual(strategy2(records), d04.part2)
       end('strategy2')
+      done()
+    })
+  })
+
+  it('Day05', function(done) {
+    readString(path.join(testPath, 'input05.txt'), (input: string) => {
+      start('buildReactionMap')
+      const rxns: Map<string, string> = buildReactionMap()
+      end('buildReactionMap', 'formPolymer')
+      assert.strictEqual(formPolymer(input, rxns).toString().length, d05.part1)
+      end('formPolymer', 'improvePolymer')
+      assert.strictEqual(improvePolymer(input, rxns).toString().length, d05.part2)
+      end('improvePolymer')
       done()
     })
   })
