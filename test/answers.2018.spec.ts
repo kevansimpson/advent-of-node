@@ -13,6 +13,9 @@ import { parseRecords, strategy1, strategy2 } from '../src/2018/day04'
 import * as d04 from '../src/2018/day04.doc'
 import { buildReactionMap, formPolymer, improvePolymer } from '../src/2018/day05'
 import * as d05 from '../src/2018/day05.doc'
+import { findLargestArea, findSafestArea, toPoints } from '../src/2018/day06'
+import * as d06 from '../src/2018/day06.doc'
+import { Point } from '../src/helpers/point';
 
 describe('2018 solutions', function() {
   const testPath = path.join(__dirname, 'resources/2018') 
@@ -76,6 +79,19 @@ describe('2018 solutions', function() {
       end('formPolymer', 'improvePolymer')
       assert.strictEqual(improvePolymer(input, rxns).toString().length, d05.part2)
       end('improvePolymer')
+      done()
+    })
+  })
+
+  it('Day06', function(done) {
+    readLines(path.join(testPath, 'input06.txt'), (input: string[]) => {
+      start('toPoints')
+      const points: Point[] = toPoints(input)
+      end('toPoints', 'findLargestArea')
+      assert.strictEqual(findLargestArea(points), d06.part1)
+      end('findLargestArea', 'findSafestArea')
+      assert.strictEqual(findSafestArea(points), d06.part2)
+      end('findSafestArea')
       done()
     })
   })

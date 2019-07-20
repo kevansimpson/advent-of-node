@@ -1,10 +1,12 @@
 import assert from 'assert';
 import 'mocha'
+import { Point } from '../src/helpers/point';
 import { findDuplicateFrequency, sum } from '../src/2018/day01'
 import { checksum, countPairsAndTriples, findPrototype } from '../src/2018/day02'
 import { Claim, Grid, buildClaimGrid, calculateOverlap, findAdjacentClaimId, parseClaim } from '../src/2018/day03'
 import { Guard, findSleepiestGuard, getSleepiestMinute, parseRecords, strategy1, strategy2 } from '../src/2018/day04'
 import { buildReactionMap, formPolymer, improvePolymer } from '../src/2018/day05'
+import { findLargestArea, findSafestArea, toPoints } from '../src/2018/day06'
 
 describe('2018 examples', function() {
   describe('Day 01', function() {
@@ -108,6 +110,17 @@ describe('2018 examples', function() {
 
     it('should return improved polymer', function() {
       assert.equal(improvePolymer('dabAcCaCBAcCcaDA', rxns), 'daDA')
+    })
+  })
+
+  describe('Day 06', function() {
+    const points: Point[] = toPoints(['1, 1', '1, 6', '8, 3', '3, 4', '5, 5', '8, 9'])
+    it('should find largest area', function() {
+      assert.equal(findLargestArea(points), 17)
+    })
+
+    it('should find safest area', function() {
+      assert.equal(findSafestArea(points, 32), 16)
     })
   })
 })
