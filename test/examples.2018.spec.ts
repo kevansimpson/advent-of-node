@@ -7,16 +7,17 @@ import { Claim, Grid, buildClaimGrid, calculateOverlap, findAdjacentClaimId, par
 import { Guard, findSleepiestGuard, getSleepiestMinute, parseRecords, strategy1, strategy2 } from '../src/2018/day04'
 import { buildReactionMap, formPolymer, improvePolymer } from '../src/2018/day05'
 import { findLargestArea, findSafestArea, toPoints } from '../src/2018/day06'
+import { buildStepMap, calculateDuration, orderInstructions } from '../src/2018/day07'
 
-describe('2018 examples', function() {
-  describe('Day 01', function() {
-    it('should return correct sum', function() {
+describe('2018 examples', () => {
+  describe('Day 01', () => {
+    it('should return correct sum', () => {
       assert.equal(sum([1, 1, 1]), 3)
       assert.equal(sum([1, 1, -2]), 0)
       assert.equal(sum([-1, -2, -3]), -6)
     })
 
-    it('should return duplicate frequency', function() {
+    it('should return duplicate frequency', () => {
       assert.equal(findDuplicateFrequency([1, -1]), 0)
       assert.equal(findDuplicateFrequency([3, 3, 4, -2, -4]), 10)
       assert.equal(findDuplicateFrequency([-6, 3, 8, 5, -6]), 5)
@@ -24,8 +25,8 @@ describe('2018 examples', function() {
     })
   })
 
-  describe('Day 02', function() {
-    it('should count pairs and triples', function() {
+  describe('Day 02', () => {
+    it('should count pairs and triples', () => {
       assert.deepEqual(countPairsAndTriples('abcdef'), {a: 1, b: 1, c: 1, d: 1, e: 1, f: 1})
       assert.deepEqual(countPairsAndTriples('bababc'), {b: 3, a: 2, c: 1})
       assert.deepEqual(countPairsAndTriples('abbcde'), {a: 1, b: 2, c: 1, d: 1, e: 1})
@@ -36,13 +37,13 @@ describe('2018 examples', function() {
       assert.equal(checksum(['abcdef', 'bababc', 'abbcde', 'abcccd', 'aabcdd', 'abcdee', 'ababab']), 12)
     })
 
-    it('should find prototype', function() {
+    it('should find prototype', () => {
       assert.equal(findPrototype(['abcde', 'fghij', 'klmno', 'pqrst', 'fguij', 'axcye', 'wvxyz']), 'fgij')
     })
   })
 
-  describe('Day 03', function() {
-    it('should parse Claim', function() {
+  describe('Day 03', () => {
+    it('should parse Claim', () => {
       const claim: Claim = parseClaim('#123 @ 3,2: 5x4')
       assert.equal(claim.id, 123)
       assert.equal(claim.left, 3)
@@ -55,16 +56,16 @@ describe('2018 examples', function() {
     const input: string[] = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
     const grid: Grid = buildClaimGrid(input)
 
-    it('should calculate overlap', function() {
+    it('should calculate overlap', () => {
       assert.equal(calculateOverlap(grid.map), 4)
     })
 
-    it('should find adjacent Claim id', function() {
+    it('should find adjacent Claim id', () => {
       assert.equal(findAdjacentClaimId(grid), 3)
     })
   })
 
-  describe('Day 04', function() {
+  describe('Day 04', () => {
     const input: string[] = [
       '[1518-11-01 00:00] Guard #10 begins shift',
       '[1518-11-01 00:05] falls asleep',
@@ -86,21 +87,21 @@ describe('2018 examples', function() {
     ]
     const records = parseRecords(input.sort())
 
-    it('should return guardID * minute', function() {
+    it('should return guardID * minute', () => {
       const guard: Guard = findSleepiestGuard(records)
       assert.equal(guard.id, 10)
       assert.equal(getSleepiestMinute(guard), 24)
       assert.equal(strategy1(records), 240)
     })
 
-    it('should return alternate strategy', function() {
+    it('should return alternate strategy', () => {
       assert.equal(strategy2(records), 4455)
     })
   })
 
-  describe('Day 05', function() {
+  describe('Day 05', () => {
     const rxns: Map<string, string> = buildReactionMap()
-    it('should return polymer', function() {
+    it('should return polymer', () => {
       assert.equal(formPolymer('aA', rxns), '')
       assert.equal(formPolymer('abBA', rxns), '')
       assert.equal(formPolymer('abAB', rxns), 'abAB')
@@ -108,19 +109,39 @@ describe('2018 examples', function() {
       assert.equal(formPolymer('dabAcCaCBAcCcaDA', rxns), 'dabCBAcaDA')
     })
 
-    it('should return improved polymer', function() {
+    it('should return improved polymer', () => {
       assert.equal(improvePolymer('dabAcCaCBAcCcaDA', rxns), 'daDA')
     })
   })
 
-  describe('Day 06', function() {
+  describe('Day 06', () => {
     const points: Point[] = toPoints(['1, 1', '1, 6', '8, 3', '3, 4', '5, 5', '8, 9'])
-    it('should find largest area', function() {
+    it('should find largest area', () => {
       assert.equal(findLargestArea(points), 17)
     })
 
-    it('should find safest area', function() {
+    it('should find safest area', () => {
       assert.equal(findSafestArea(points, 32), 16)
+    })
+  })
+
+  describe('Day 07', () => {
+    const input = [
+      'Step C must be finished before step A can begin.',
+      'Step C must be finished before step F can begin.',
+      'Step A must be finished before step B can begin.',
+      'Step A must be finished before step D can begin.',
+      'Step B must be finished before step E can begin.',
+      'Step D must be finished before step E can begin.',
+      'Step F must be finished before step E can begin.'
+    ]
+
+    it('should order instructions', () => {
+      assert.equal(orderInstructions(buildStepMap(input)), 'CABDFE')
+    })
+
+    it('should calculate duration', () => {
+      assert.equal(calculateDuration(buildStepMap(input), 2, 0), 15)
     })
   })
 })

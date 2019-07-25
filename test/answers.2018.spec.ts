@@ -2,6 +2,7 @@ import assert from 'assert'
 import 'mocha'
 import path from 'path'
 import { readLines, readNumbers, readString } from '../src/helpers/input'
+import { Point } from '../src/helpers/point'
 import { answer, start, end } from '../src/helpers/util'
 import { findDuplicateFrequency, sum } from '../src/2018/day01'
 import * as d01 from '../src/2018/day01.doc'
@@ -15,20 +16,21 @@ import { buildReactionMap, formPolymer, improvePolymer } from '../src/2018/day05
 import * as d05 from '../src/2018/day05.doc'
 import { findLargestArea, findSafestArea, toPoints } from '../src/2018/day06'
 import * as d06 from '../src/2018/day06.doc'
-import { Point } from '../src/helpers/point';
+import { buildStepMap, calculateDuration, orderInstructions } from '../src/2018/day07'
+import * as d07 from '../src/2018/day07.doc'
 
-describe('2018 solutions', function() {
+describe('2018 solutions', () => {
   const testPath = path.join(__dirname, 'resources/2018') 
 
-  before(function() {
+  before(() => {
     start('2018')
   })
 
-  after(function() {
+  after(() => {
     end('2018')
   })
 
-  it('Day01', function(done) {
+  it('Day01', (done) => {
     readNumbers(path.join(testPath, 'input01.txt'), (input: number[]) => {
       answer(d01.part1, sum, input)
       answer(d01.part2, findDuplicateFrequency, input)
@@ -36,7 +38,7 @@ describe('2018 solutions', function() {
     })
   })
 
-  it('Day02 ', function(done) {
+  it('Day02 ', (done) => {
     readLines(path.join(testPath, 'input02.txt'), (input: string[]) => {
       answer(d02.part1, checksum, input)
       answer(d02.part2, findPrototype, input)
@@ -44,7 +46,7 @@ describe('2018 solutions', function() {
     })
   })
 
-  it('Day03', function(done) {
+  it('Day03', (done) => {
     readLines(path.join(testPath, 'input03.txt'), (input: string[]) => {
       start('buildClaimGrid')
       const grid: Grid = buildClaimGrid(input.reverse())
@@ -57,7 +59,7 @@ describe('2018 solutions', function() {
     })
   })
 
-  it('Day04', function(done) {
+  it('Day04', (done) => {
     readLines(path.join(testPath, 'input04.txt'), (input: string[]) => {
       start('parseRecords')
       const records = parseRecords(input.sort())
@@ -70,7 +72,7 @@ describe('2018 solutions', function() {
     })
   })
 
-  it('Day05', function(done) {
+  it('Day05', (done) => {
     readString(path.join(testPath, 'input05.txt'), (input: string) => {
       start('buildReactionMap')
       const rxns: Map<string, string> = buildReactionMap()
@@ -83,7 +85,7 @@ describe('2018 solutions', function() {
     })
   })
 
-  it('Day06', function(done) {
+  it('Day06', (done) => {
     readLines(path.join(testPath, 'input06.txt'), (input: string[]) => {
       start('toPoints')
       const points: Point[] = toPoints(input)
@@ -92,6 +94,18 @@ describe('2018 solutions', function() {
       end('findLargestArea', 'findSafestArea')
       assert.strictEqual(findSafestArea(points), d06.part2)
       end('findSafestArea')
+      done()
+    })
+  })
+
+  it.skip('Day07', (done) => {
+    readLines(path.join(testPath, 'input07.txt'), (input: string[]) => {
+      console.log(input.length)
+      start('orderInstructions')
+      assert.strictEqual(orderInstructions(buildStepMap(input)), d07.part1)
+      end('orderInstructions', 'calculateDuration')
+      assert.strictEqual(calculateDuration(buildStepMap(input), 5, 60), d07.part2)
+      end('calculateDuration')
       done()
     })
   })
