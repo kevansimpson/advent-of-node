@@ -8,6 +8,7 @@ import { Guard, findSleepiestGuard, getSleepiestMinute, parseRecords, strategy1,
 import { buildReactionMap, formPolymer, improvePolymer } from '../src/2018/day05'
 import { findLargestArea, findSafestArea, toPoints } from '../src/2018/day06'
 import { buildStepMap, calculateDuration, orderInstructions } from '../src/2018/day07'
+import { Node, buildTree, calculateRootNode, sumMetadata } from '../src/2018/day08'
 
 describe('2018 examples', () => {
   describe('Day 01', () => {
@@ -144,4 +145,18 @@ describe('2018 examples', () => {
       assert.equal(calculateDuration(buildStepMap(input), 2, 0), 15)
     })
   })
+
+  describe('Day 08', () => {
+    const input = [2, 3, 0, 3, 10, 11, 12, 1, 1, 0, 1, 99, 2, 1, 1, 2]
+    const tree: [Node, number] = buildTree(input, 0)
+
+    it('should find largest area', () => {
+      assert.equal(sumMetadata(tree), 138)
+    })
+
+    it('should find safest area', () => {
+      assert.equal(calculateRootNode(tree), 66)
+    })
+  })
+
 })

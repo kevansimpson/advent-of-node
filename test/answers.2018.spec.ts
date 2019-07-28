@@ -1,7 +1,7 @@
 import assert from 'assert'
 import 'mocha'
 import path from 'path'
-import { readLines, readNumbers, readString } from '../src/helpers/input'
+import { readLines, readNumbers, readString, splitNumbers } from '../src/helpers/input'
 import { Point } from '../src/helpers/point'
 import { answer, start, end } from '../src/helpers/util'
 import { findDuplicateFrequency, sum } from '../src/2018/day01'
@@ -18,6 +18,8 @@ import { findLargestArea, findSafestArea, toPoints } from '../src/2018/day06'
 import * as d06 from '../src/2018/day06.doc'
 import { buildStepMap, calculateDuration, orderInstructions } from '../src/2018/day07'
 import * as d07 from '../src/2018/day07.doc'
+import { Node, buildTree, calculateRootNode, sumMetadata } from '../src/2018/day08'
+import * as d08 from '../src/2018/day08.doc'
 
 describe('2018 solutions', () => {
   const testPath = path.join(__dirname, 'resources/2018') 
@@ -106,6 +108,19 @@ describe('2018 solutions', () => {
       end('orderInstructions', 'calculateDuration')
       assert.strictEqual(calculateDuration(buildStepMap(input), 5, 60), d07.part2)
       end('calculateDuration')
+      done()
+    })
+  })
+
+  it('Day08', (done) => {
+    splitNumbers (path.join(testPath, 'input08.txt'), (input: number[]) => {
+      start('buildTree')
+      const tree: [Node, number] = buildTree(input, 0)
+      end('buildTree', 'sumMetadata')
+      assert.strictEqual(sumMetadata(tree), d08.part1)
+      end('sumMetadata', 'calculateRootNode')
+      assert.strictEqual(calculateRootNode(tree), d08.part2)
+      end('calculateRootNode')
       done()
     })
   })

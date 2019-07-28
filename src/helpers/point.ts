@@ -1,3 +1,6 @@
+/**
+ * @module helpers
+ */
 
 export type Point = [ number, number ]
 

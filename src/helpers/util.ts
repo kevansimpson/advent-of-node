@@ -1,3 +1,6 @@
+/**
+ * @module helpers
+ */
 import assert from 'assert'
 import { Answer } from '../types/advent'
 
@@ -20,4 +23,8 @@ export function start (name: string): void {
 export function end (name: string, next?: string): void {
   if (debug()) console.timeEnd(`${indent}${name}`)
   if (next) start(next)
+}
+
+export function sum (intArray: number[]): number {
+  return intArray.reduce((a: number, b: number) => a + b)
 }

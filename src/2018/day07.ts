@@ -52,11 +52,11 @@ export function orderInstructions (steps: Map<string, Step>): Answer {
 
 export function calculateDuration (steps: Map<string, Step>, workers: number, offset: number): Answer {
   const skeys = [...steps.keys()].sort()
-  for (let key of skeys) console.log(`${key} => ${JSON.stringify(steps.get(key))}`)
+  // for (let key of skeys) console.log(`${key} => ${JSON.stringify(steps.get(key))}`)
   const manager = new Manager(workers, offset)
   let elapsed = 0
 
-  console.log(`MGR => ${JSON.stringify(manager)}`)
+  // console.log(`MGR => ${JSON.stringify(manager)}`)
   // steps MUST be analyzed in alphabetical order
   let complete: boolean = false
   while (!complete) {
@@ -65,15 +65,17 @@ export function calculateDuration (steps: Map<string, Step>, workers: number, of
       const step = steps.get(k)
       if (step === undefined) throw new Error('Undefined Step!')
 
+      // console.log(`FOO1 => ${JSON.stringify(step)} => ${isDone(step)}`)
       if (isDone(step)) continue
 
       if (isAvailable(step, steps) && !step.active) {
         complete = false
         manager.addTask(step)
-      }
+      } // else console.log(`!AVAIL => ${step.name}`)
     }
 
     if (!manager.isWorkDone()) {
+      // console.log(`DISTR => ${manager.tasks.length}`)
       manager.distributeTasks()
       elapsed++
       manager.tick()
@@ -81,6 +83,7 @@ export function calculateDuration (steps: Map<string, Step>, workers: number, of
 
     // More work to do in future?
     if (complete) {
+      // console.log(`FUTURE`)
       for (let k of skeys) {
         const step = steps.get(k)
         if (step === undefined) throw new Error('Undefined Future Step!')
@@ -90,6 +93,9 @@ export function calculateDuration (steps: Map<string, Step>, workers: number, of
         }
       }
     }
+
+    // console.log(`COMPLETE => ${complete} => ELAPSED: ${elapsed}`)
+    if (elapsed > 983) console.log(`MGR => ${JSON.stringify(manager)}`)
   }
 
   return elapsed

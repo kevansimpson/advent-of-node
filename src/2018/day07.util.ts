@@ -26,17 +26,22 @@ export class Manager {
   }
 
   distributeTasks (): void {
+    // console.log(`#TASKS => ${this.tasks.length}`)
     if (this.tasks.length > 0) {
       const iter: Iterator<Step> = this.tasks[Symbol.iterator]()
       let next = iter.next()
+      // console.log(`NEXT => ${JSON.stringify(next)}`)
       let worker: Worker | null = this.nextWorker()
+      // console.log(`WORK => ${JSON.stringify(worker)}`)
       while (worker !== null && !next.done) {
         const task = next.value
+        // console.log(`START => ${task.name}`)
         worker.startTask(task)
         const index = this.tasks.indexOf(task, 0)
         if (index > -1) this.tasks.splice(index, 1)
         worker = this.nextWorker()
         next = iter.next()
+        // console.log(`NXWK => ${JSON.stringify(worker)}`)
       }
     }
   }
@@ -77,7 +82,9 @@ export class Worker {
   }
 
   tick (): void {
+    // console.log(`WTICK => ${JSON.stringify(this)}`)
     if (this.duration > 0) --this.duration
+    // console.log(`WTICK => ${this.duration}`)
 
     if (this.duration === 0) {
       if (this.task !== undefined) markDone(this.task)
@@ -85,9 +92,11 @@ export class Worker {
   }
 
   startTask (step: Step): void {
+    // console.log(`startTask1 => ${JSON.stringify(this)}`)
     this.duration = getDuration(step, this.offset)
     this.task = step
     activate(this.task)
+    // console.log(`startTask2 => ${JSON.stringify(this)}`)
   }
 
   isAvailable (): boolean {
@@ -102,6 +111,7 @@ function activate (step: Step): void {
 
 function getDuration (step: Step, offset: number): number {
   return (step.name.codePointAt(0) || 0) - 64 + offset
+  // return ((int) getName()) - 64 + offset; // -64 is ('A' - 1)
 }
 
 export function markDone (step: Step): void {
