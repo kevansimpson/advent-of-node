@@ -9,7 +9,7 @@
     "test": "run-s build test:*",
     "test:lint": "tslint --project .",
     "test:examples": "mocha -s 0 --require ts-node/register test/examples.*.spec.ts --exit",
-    "test:answers": "mocha -s 0 --require ts-node/register test/answers.*.spec.ts --exit",
+    "test:answers": "mocha -s 0 --require ts-node/register test/answers.*.spec.ts --exit --advent",
     "start": "node --max_old_space_size=8192 dist/start.js",
     "local:advent": "nodemon --inspect --max_old_space_size=8192 dist/start.js",
     "local": "run-p local:*",
@@ -32,8 +32,8 @@
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.0.12",
-    "mocha": "^6.1.4",
+    "@types/node": "^12.6.8",
+    "mocha": "^6.2.0",
     "nodemon": "^1.19.1",
     "npm-run-all": "^4.1.5",
     "trash-cli": "^3.0.0",
@@ -42,6 +42,6 @@
     "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.14.2",
     "typedoc-plugin-external-module-name": "^2.1.0",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   }
 }
