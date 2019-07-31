@@ -1,6 +1,6 @@
 import assert from 'assert';
 import 'mocha'
-import { Point } from '../src/helpers/point';
+import { Point } from '../src/helpers/point'
 import { findDuplicateFrequency, sum } from '../src/2018/day01'
 import { checksum, countPairsAndTriples, findPrototype } from '../src/2018/day02'
 import { Claim, Grid, buildClaimGrid, calculateOverlap, findAdjacentClaimId, parseClaim } from '../src/2018/day03'
@@ -9,6 +9,7 @@ import { buildReactionMap, formPolymer, improvePolymer } from '../src/2018/day05
 import { findLargestArea, findSafestArea, toPoints } from '../src/2018/day06'
 import { buildStepMap, calculateDuration, orderInstructions } from '../src/2018/day07'
 import { Node, buildTree, calculateRootNode, sumMetadata } from '../src/2018/day08'
+import { highestScore, playGame } from '../src/2018/day09'
 
 describe('2018 examples', () => {
   describe('Day 01', () => {
@@ -150,12 +151,23 @@ describe('2018 examples', () => {
     const input = [2, 3, 0, 3, 10, 11, 12, 1, 1, 0, 1, 99, 2, 1, 1, 2]
     const tree: [Node, number] = buildTree(input, 0)
 
-    it('should find largest area', () => {
+    it('should sum metadata', () => {
       assert.equal(sumMetadata(tree), 138)
     })
 
-    it('should find safest area', () => {
+    it('should calculate root node', () => {
       assert.equal(calculateRootNode(tree), 66)
+    })
+  })
+
+  describe('Day 09', () => {
+    it('should score game correctly', () => {
+      assert.equal(highestScore(playGame(9, 25)), 32)
+      assert.equal(highestScore(playGame(10, 1618)), 8317)
+      assert.equal(highestScore(playGame(13, 7999)), 146373)
+      assert.equal(highestScore(playGame(17, 1104)), 2764)
+      assert.equal(highestScore(playGame(21, 6111)), 54718)
+      assert.equal(highestScore(playGame(30, 5807)), 37305)
     })
   })
 

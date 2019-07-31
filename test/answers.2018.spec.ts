@@ -20,6 +20,8 @@ import { buildStepMap, calculateDuration, orderInstructions } from '../src/2018/
 import * as d07 from '../src/2018/day07.doc'
 import { Node, buildTree, calculateRootNode, sumMetadata } from '../src/2018/day08'
 import * as d08 from '../src/2018/day08.doc'
+import { game1, game2 } from '../src/2018/day09'
+import * as d09 from '../src/2018/day09.doc'
 
 describe('2018 solutions', () => {
   const testPath = path.join(__dirname, 'resources/2018') 
@@ -124,4 +126,16 @@ describe('2018 solutions', () => {
       done()
     })
   })
+
+  it('Day09', (done) => {
+    const players = 465
+    const lastMarble = 71498
+    start('game1')
+    assert.strictEqual(game1(players, lastMarble), d09.part1)
+    end('game1', 'game2')
+    assert.strictEqual(game2(players, lastMarble), d09.part2)
+    end('game2')
+    done()
+  })
+
 })
