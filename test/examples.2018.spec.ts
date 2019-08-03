@@ -10,20 +10,21 @@ import { findLargestArea, findSafestArea, toPoints } from '../src/2018/day06'
 import { buildStepMap, calculateDuration, orderInstructions } from '../src/2018/day07'
 import { Node, buildTree, calculateRootNode, sumMetadata } from '../src/2018/day08'
 import { highestScore, playGame } from '../src/2018/day09'
+import { alignStars, toMovingPoints } from '../src/2018/day10'
 
 describe('2018 examples', () => {
   describe('Day 01', () => {
     it('should return correct sum', () => {
-      assert.equal(sum([1, 1, 1]), 3)
-      assert.equal(sum([1, 1, -2]), 0)
-      assert.equal(sum([-1, -2, -3]), -6)
+      assert.strictEqual(sum([1, 1, 1]), 3)
+      assert.strictEqual(sum([1, 1, -2]), 0)
+      assert.strictEqual(sum([-1, -2, -3]), -6)
     })
 
     it('should return duplicate frequency', () => {
-      assert.equal(findDuplicateFrequency([1, -1]), 0)
-      assert.equal(findDuplicateFrequency([3, 3, 4, -2, -4]), 10)
-      assert.equal(findDuplicateFrequency([-6, 3, 8, 5, -6]), 5)
-      assert.equal(findDuplicateFrequency([7, 7, -2, -7, -4]), 14)
+      assert.strictEqual(findDuplicateFrequency([1, -1]), 0)
+      assert.strictEqual(findDuplicateFrequency([3, 3, 4, -2, -4]), 10)
+      assert.strictEqual(findDuplicateFrequency([-6, 3, 8, 5, -6]), 5)
+      assert.strictEqual(findDuplicateFrequency([7, 7, -2, -7, -4]), 14)
     })
   })
 
@@ -36,34 +37,34 @@ describe('2018 examples', () => {
       assert.deepEqual(countPairsAndTriples('aabcdd'), {a: 2, b: 1, c: 1, d: 2})
       assert.deepEqual(countPairsAndTriples('abcdee'), {a: 1, b: 1, c: 1, d: 1, e: 2})
       assert.deepEqual(countPairsAndTriples('ababab'), {a: 3, b: 3})
-      assert.equal(checksum(['abcdef', 'bababc', 'abbcde', 'abcccd', 'aabcdd', 'abcdee', 'ababab']), 12)
+      assert.strictEqual(checksum(['abcdef', 'bababc', 'abbcde', 'abcccd', 'aabcdd', 'abcdee', 'ababab']), 12)
     })
 
     it('should find prototype', () => {
-      assert.equal(findPrototype(['abcde', 'fghij', 'klmno', 'pqrst', 'fguij', 'axcye', 'wvxyz']), 'fgij')
+      assert.strictEqual(findPrototype(['abcde', 'fghij', 'klmno', 'pqrst', 'fguij', 'axcye', 'wvxyz']), 'fgij')
     })
   })
 
   describe('Day 03', () => {
     it('should parse Claim', () => {
       const claim: Claim = parseClaim('#123 @ 3,2: 5x4')
-      assert.equal(claim.id, 123)
-      assert.equal(claim.left, 3)
-      assert.equal(claim.top, 2)
-      assert.equal(claim.width, 5)
-      assert.equal(claim.height, 4)
-      assert.equal(claim.points.length, 20)
+      assert.strictEqual(claim.id, 123)
+      assert.strictEqual(claim.left, 3)
+      assert.strictEqual(claim.top, 2)
+      assert.strictEqual(claim.width, 5)
+      assert.strictEqual(claim.height, 4)
+      assert.strictEqual(claim.points.length, 20)
     })
 
     const input: string[] = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
     const grid: Grid = buildClaimGrid(input)
 
     it('should calculate overlap', () => {
-      assert.equal(calculateOverlap(grid.map), 4)
+      assert.strictEqual(calculateOverlap(grid.map), 4)
     })
 
     it('should find adjacent Claim id', () => {
-      assert.equal(findAdjacentClaimId(grid), 3)
+      assert.strictEqual(findAdjacentClaimId(grid), 3)
     })
   })
 
@@ -91,39 +92,39 @@ describe('2018 examples', () => {
 
     it('should return guardID * minute', () => {
       const guard: Guard = findSleepiestGuard(records)
-      assert.equal(guard.id, 10)
-      assert.equal(getSleepiestMinute(guard), 24)
-      assert.equal(strategy1(records), 240)
+      assert.strictEqual(guard.id, 10)
+      assert.strictEqual(getSleepiestMinute(guard), 24)
+      assert.strictEqual(strategy1(records), 240)
     })
 
     it('should return alternate strategy', () => {
-      assert.equal(strategy2(records), 4455)
+      assert.strictEqual(strategy2(records), 4455)
     })
   })
 
   describe('Day 05', () => {
     const rxns: Map<string, string> = buildReactionMap()
     it('should return polymer', () => {
-      assert.equal(formPolymer('aA', rxns), '')
-      assert.equal(formPolymer('abBA', rxns), '')
-      assert.equal(formPolymer('abAB', rxns), 'abAB')
-      assert.equal(formPolymer('aabAAB', rxns), 'aabAAB')
-      assert.equal(formPolymer('dabAcCaCBAcCcaDA', rxns), 'dabCBAcaDA')
+      assert.strictEqual(formPolymer('aA', rxns), '')
+      assert.strictEqual(formPolymer('abBA', rxns), '')
+      assert.strictEqual(formPolymer('abAB', rxns), 'abAB')
+      assert.strictEqual(formPolymer('aabAAB', rxns), 'aabAAB')
+      assert.strictEqual(formPolymer('dabAcCaCBAcCcaDA', rxns), 'dabCBAcaDA')
     })
 
     it('should return improved polymer', () => {
-      assert.equal(improvePolymer('dabAcCaCBAcCcaDA', rxns), 'daDA')
+      assert.strictEqual(improvePolymer('dabAcCaCBAcCcaDA', rxns), 'daDA')
     })
   })
 
   describe('Day 06', () => {
     const points: Point[] = toPoints(['1, 1', '1, 6', '8, 3', '3, 4', '5, 5', '8, 9'])
     it('should find largest area', () => {
-      assert.equal(findLargestArea(points), 17)
+      assert.strictEqual(findLargestArea(points), 17)
     })
 
     it('should find safest area', () => {
-      assert.equal(findSafestArea(points, 32), 16)
+      assert.strictEqual(findSafestArea(points, 32), 16)
     })
   })
 
@@ -139,11 +140,11 @@ describe('2018 examples', () => {
     ]
 
     it('should order instructions', () => {
-      assert.equal(orderInstructions(buildStepMap(input)), 'CABDFE')
+      assert.strictEqual(orderInstructions(buildStepMap(input)), 'CABDFE')
     })
 
     it('should calculate duration', () => {
-      assert.equal(calculateDuration(buildStepMap(input), 2, 0), 15)
+      assert.strictEqual(calculateDuration(buildStepMap(input), 2, 0), 15)
     })
   })
 
@@ -152,22 +153,46 @@ describe('2018 examples', () => {
     const tree: [Node, number] = buildTree(input, 0)
 
     it('should sum metadata', () => {
-      assert.equal(sumMetadata(tree), 138)
+      assert.strictEqual(sumMetadata(tree), 138)
     })
 
     it('should calculate root node', () => {
-      assert.equal(calculateRootNode(tree), 66)
+      assert.strictEqual(calculateRootNode(tree), 66)
     })
   })
 
   describe('Day 09', () => {
     it('should score game correctly', () => {
-      assert.equal(highestScore(playGame(9, 25)), 32)
-      assert.equal(highestScore(playGame(10, 1618)), 8317)
-      assert.equal(highestScore(playGame(13, 7999)), 146373)
-      assert.equal(highestScore(playGame(17, 1104)), 2764)
-      assert.equal(highestScore(playGame(21, 6111)), 54718)
-      assert.equal(highestScore(playGame(30, 5807)), 37305)
+      assert.strictEqual(highestScore(playGame(9, 25)), 32)
+      assert.strictEqual(highestScore(playGame(10, 1618)), 8317)
+      assert.strictEqual(highestScore(playGame(13, 7999)), 146373)
+      assert.strictEqual(highestScore(playGame(17, 1104)), 2764)
+      assert.strictEqual(highestScore(playGame(21, 6111)), 54718)
+      assert.strictEqual(highestScore(playGame(30, 5807)), 37305)
+    })
+  })
+
+  describe('Day 10', () => {
+    it('should identify word in the stars', () => {
+      const input = [
+        'position=< 9,  1> velocity=< 0,  2>', 'position=< 7,  0> velocity=<-1,  0>',
+        'position=< 3, -2> velocity=<-1,  1>', 'position=< 6, 10> velocity=<-2, -1>',
+        'position=< 2, -4> velocity=< 2,  2>', 'position=<-6, 10> velocity=< 2, -2>',
+        'position=< 1,  8> velocity=< 1, -1>', 'position=< 1,  7> velocity=< 1,  0>',
+        'position=<-3, 11> velocity=< 1, -2>', 'position=< 7,  6> velocity=<-1, -1>',
+        'position=<-2,  3> velocity=< 1,  0>', 'position=<-4,  3> velocity=< 2,  0>',
+        'position=<10, -3> velocity=<-1,  1>', 'position=< 5, 11> velocity=< 1, -2>',
+        'position=< 4,  7> velocity=< 0, -1>', 'position=< 8, -2> velocity=< 0,  1>',
+        'position=<15,  0> velocity=<-2,  0>', 'position=< 1,  6> velocity=< 1,  0>',
+        'position=< 8,  9> velocity=< 0, -1>', 'position=< 3,  3> velocity=<-1,  1>',
+        'position=< 0,  5> velocity=< 0, -1>', 'position=<-2,  2> velocity=< 2,  0>',
+        'position=< 5, -2> velocity=< 1,  2>', 'position=< 1,  4> velocity=< 2,  1>',
+        'position=<-2,  7> velocity=< 2, -2>', 'position=< 3,  6> velocity=<-1, -1>',
+        'position=< 5,  0> velocity=< 1,  0>', 'position=<-6,  0> velocity=< 2,  0>',
+        'position=< 5,  9> velocity=< 1, -2>', 'position=<14,  7> velocity=<-2,  0>',
+        'position=<-3,  6> velocity=< 2, -1>'
+      ]
+      assert.strictEqual(alignStars(toMovingPoints(input), 10), 3)
     })
   })
 

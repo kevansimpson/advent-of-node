@@ -22,6 +22,8 @@ import { Node, buildTree, calculateRootNode, sumMetadata } from '../src/2018/day
 import * as d08 from '../src/2018/day08.doc'
 import { game1, game2 } from '../src/2018/day09'
 import * as d09 from '../src/2018/day09.doc'
+import { MovingPoint, alignStars, toMovingPoints } from '../src/2018/day10'
+import * as d10 from '../src/2018/day10.doc'
 
 describe('2018 solutions', () => {
   const testPath = path.join(__dirname, 'resources/2018') 
@@ -136,6 +138,17 @@ describe('2018 solutions', () => {
     assert.strictEqual(game2(players, lastMarble), d09.part2)
     end('game2')
     done()
+  })
+
+  it('Day10', (done) => {
+    readLines(path.join(testPath, 'input10.txt'), (input: string[]) => {
+      start('toMovingPoints')
+      const points: MovingPoint[] = toMovingPoints(input)
+      end('toMovingPoints', 'alignStars')
+      assert.strictEqual(alignStars(points, 20), d10.part2)
+      end('alignStars')
+      done()
+    })
   })
 
 })
