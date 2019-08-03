@@ -1,5 +1,5 @@
 /**
- * @module 2018_day01
+ * @module 2018_day10
  */
 import { Answer } from '../types/advent'
 import { Point } from '../helpers/point'

@@ -1,5 +1,5 @@
 /**
- * @module 2018_day01
+ * @module 2018_day10
  */
 /**
  * <h2>Part 1</h2>
