@@ -1,7 +1,6 @@
 /**
  * @module 2018_day07
  */
-// import { Answer } from '../types/advent'
 
 export type Step = {
   name: string,

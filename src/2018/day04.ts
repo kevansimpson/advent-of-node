@@ -1,7 +1,7 @@
 /**
  * @module 2018_day04
  */
-import { Answer, Range } from '../types/advent'
+import { Range } from '../types/advent'
 
 export type Guard = {
   id: number
@@ -86,12 +86,12 @@ export function parseRecords (input: string[]): Map<number, Guard> {
   return records
 }
 
-export function strategy1 (input: Map<number, Guard>): Answer {
+export function strategy1 (input: Map<number, Guard>): number {
   const sleepy: Guard = findSleepiestGuard(input)
   return sleepy.id * getSleepiestMinute(sleepy)
 }
 
-export function strategy2 (records: Map<number, Guard>): Answer {
+export function strategy2 (records: Map<number, Guard>): number {
   const sleepiest: Map<number, number> = new Map()
   for (let rec of records.values()) sleepiest.set(rec.id, getSleepiestMinute(rec))
 

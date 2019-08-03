@@ -1,11 +1,10 @@
 /**
  * @module 2018_day10
  */
-import { Answer } from '../types/advent'
-import { Point } from '../helpers/point'
+import { Point, includes } from '../helpers/point'
 import { debug } from '../helpers/util'
 
-export function alignStars (points: MovingPoint[], threshold: number): Answer {
+export function alignStars (points: MovingPoint[], threshold: number): number {
   let secs = 0
   let deltaY = Number.MAX_VALUE
   let list: MovingPoint[] = [...points]
@@ -84,13 +83,6 @@ function display (points: MovingPoint[]): string[] {
   }
 
   return buff
-}
-
-function includes (list: Point[], target: Point): boolean {
-  for (let pt of list) {
-    if (pt[0] === target[0] && pt[1] === target[1]) return true
-  }
-  return false
 }
 
 export type Velocity = [number, number] // horizontal, vertical

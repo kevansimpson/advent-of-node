@@ -1,9 +1,8 @@
 /**
  * @module 2018_day05
  */
-import { Answer } from '../types/advent'
 
-export function formPolymer (input: string, rxns: Map<string, string>): Answer {
+export function formPolymer (input: string, rxns: Map<string, string>): string {
   const polymers = input.split('')
   const stack: string[] = []
   for (let ch of polymers) {
@@ -14,7 +13,7 @@ export function formPolymer (input: string, rxns: Map<string, string>): Answer {
   return stack.join('')
 }
 
-export function improvePolymer (input: string, rxns: Map<string, string>): Answer {
+export function improvePolymer (input: string, rxns: Map<string, string>): string {
   const collapsed: Map<string, string> = new Map()
   for (let ch of rxns.keys()) {
     if (collapsed.has(ch)) continue

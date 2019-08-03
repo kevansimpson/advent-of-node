@@ -3,7 +3,7 @@ import 'mocha'
 import path from 'path'
 import { readLines, readNumbers, readString, splitNumbers } from '../src/helpers/input'
 import { Point } from '../src/helpers/point'
-import { answer, start, end } from '../src/helpers/util'
+import { start, end } from '../src/helpers/util'
 import { findDuplicateFrequency, sum } from '../src/2018/day01'
 import * as d01 from '../src/2018/day01.doc'
 import { checksum, findPrototype } from '../src/2018/day02'
@@ -24,6 +24,8 @@ import { game1, game2 } from '../src/2018/day09'
 import * as d09 from '../src/2018/day09.doc'
 import { MovingPoint, alignStars, toMovingPoints } from '../src/2018/day10'
 import * as d10 from '../src/2018/day10.doc'
+import { findMostPowerfulSquareFromSerial, findTopLeftOfMostPowerfulSquare } from '../src/2018/day11'
+import * as d11 from '../src/2018/day11.doc'
 
 describe('2018 solutions', () => {
   const testPath = path.join(__dirname, 'resources/2018') 
@@ -38,16 +40,22 @@ describe('2018 solutions', () => {
 
   it('Day01', (done) => {
     readNumbers(path.join(testPath, 'input01.txt'), (input: number[]) => {
-      answer(d01.part1, sum, input)
-      answer(d01.part2, findDuplicateFrequency, input)
+      start('sum')
+      assert.strictEqual(sum(input), d01.part1)
+      end('sum', 'findDuplicateFrequency')
+      assert.strictEqual(findDuplicateFrequency(input), d01.part2)
+      end('findDuplicateFrequency')
       done()
     })
   })
 
   it('Day02 ', (done) => {
     readLines(path.join(testPath, 'input02.txt'), (input: string[]) => {
-      answer(d02.part1, checksum, input)
-      answer(d02.part2, findPrototype, input)
+      start('checksum')
+      assert.strictEqual(checksum(input), d02.part1)
+      end('checksum', 'findPrototype')
+      assert.strictEqual(findPrototype(input), d02.part2)
+      end('findPrototype')
       done()
     })
   })
@@ -130,12 +138,10 @@ describe('2018 solutions', () => {
   })
 
   it('Day09', (done) => {
-    const players = 465
-    const lastMarble = 71498
     start('game1')
-    assert.strictEqual(game1(players, lastMarble), d09.part1)
+    assert.strictEqual(game1(d09.players, d09.lastMarble), d09.part1)
     end('game1', 'game2')
-    assert.strictEqual(game2(players, lastMarble), d09.part2)
+    assert.strictEqual(game2(d09.players, d09.lastMarble), d09.part2)
     end('game2')
     done()
   })
@@ -149,6 +155,22 @@ describe('2018 solutions', () => {
       end('alignStars')
       done()
     })
+  })
+
+  describe('Day11', () => {
+    it('findTopLeftOfMostPowerfulSquare', (done) => {
+      start('findTopLeftOfMostPowerfulSquare')
+      assert.deepStrictEqual(findTopLeftOfMostPowerfulSquare(d11.input, 3, 0), d11.part1)
+      end('findTopLeftOfMostPowerfulSquare')
+      done()
+    })
+
+    it.skip('findMostPowerfulSquareFromSerial', (done) => {
+      start('findMostPowerfulSquareFromSerial')
+      assert.deepStrictEqual(findMostPowerfulSquareFromSerial(d11.input), d11.part2)
+      end('findMostPowerfulSquareFromSerial')
+      done()
+    }).timeout(5000 * 4) // 20s, takes about 15s
   })
 
 })

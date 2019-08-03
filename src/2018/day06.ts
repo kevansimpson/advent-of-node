@@ -2,9 +2,8 @@
  * @module 2018_day01
  */
 import { Point, key, manhattanDistance } from '../helpers/point'
-import { Answer } from '../types/advent'
 
-export function findLargestArea (points: Point[]): Answer {
+export function findLargestArea (points: Point[]): number {
   const maxX = points.reduce((a, b) => a[0] > b[0] ? a : b)[0]
   const maxY = points.reduce((a, b) => a[1] > b[1] ? a : b)[1]
   const grid: Map<string, number> = new Map()
@@ -44,7 +43,7 @@ export function findLargestArea (points: Point[]): Answer {
   return Math.max(...regions.values())
 }
 
-export function findSafestArea (points: Point[], threshhold: number = 10000): Answer {
+export function findSafestArea (points: Point[], threshhold: number = 10000): number {
   const maxX = points.reduce((a, b) => a[0] > b[0] ? a : b)[0]
   const maxY = points.reduce((a, b) => a[1] > b[1] ? a : b)[1]
   let area = 0

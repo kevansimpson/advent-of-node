@@ -1,10 +1,9 @@
 /**
  * @module 2018_day08
  */
-import { Answer } from '../types/advent'
 import { sum as utilSum } from '../helpers/util'
 
-export function sumMetadata (tree: [Node, number]): Answer {
+export function sumMetadata (tree: [Node, number]): number {
   let sum = 0
   const nodes: Node[] = []
 
@@ -20,7 +19,7 @@ export function sumMetadata (tree: [Node, number]): Answer {
   return sum
 }
 
-export function calculateRootNode (tree: [Node, number]): Answer {
+export function calculateRootNode (tree: [Node, number]): number {
   let sum = 0
   const nodes: Node[] = []
   nodes.push(tree[0])

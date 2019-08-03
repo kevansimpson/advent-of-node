@@ -2,7 +2,6 @@
  * @module 2018_day07
  */
 import { Step, Manager, markDone } from './day07.util'
-import { Answer } from '../types/advent'
 
 export function buildStepMap (input: string[]): Map<string, Step> {
   const pairs: [string, string][] = input
@@ -26,7 +25,7 @@ export function buildStepMap (input: string[]): Map<string, Step> {
   return steps
 }
 
-export function orderInstructions (steps: Map<string, Step>): Answer {
+export function orderInstructions (steps: Map<string, Step>): string {
   let complete: boolean = false
   const instr: string[] = []
   // steps MUST be analyzed in alphabetical order
@@ -50,7 +49,7 @@ export function orderInstructions (steps: Map<string, Step>): Answer {
   return instr.join('')
 }
 
-export function calculateDuration (steps: Map<string, Step>, workers: number, offset: number): Answer {
+export function calculateDuration (steps: Map<string, Step>, workers: number, offset: number): number {
   const skeys = [...steps.keys()].sort()
   // for (let key of skeys) console.log(`${key} => ${JSON.stringify(steps.get(key))}`)
   const manager = new Manager(workers, offset)

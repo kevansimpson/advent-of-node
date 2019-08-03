@@ -1,6 +1,12 @@
 /**
  * @module 2018_day09
  */
+
+/** Number of players */
+export const players = 465
+/** The last marble */
+export const lastMarble = 71498
+
 /**
  * <h2>Part 1</h2>
  * You talk to the Elves while you wait for your navigation system to initialize.

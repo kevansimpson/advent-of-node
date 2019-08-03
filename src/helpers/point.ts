@@ -12,6 +12,17 @@ export function toKey (pt: Point): string {
   return `[${pt[0]},${pt[1]}]`
 }
 
+export function includes (list: Point[], target: Point): boolean {
+  for (let pt of list) {
+    if (samePoint(pt, target)) return true
+  }
+  return false
+}
+
 export function manhattanDistance (a: Point, b: Point): number {
   return Math.abs(b[0] - a[0]) + Math.abs(b[1] - a[1])
+}
+
+export function samePoint (a: Point, b: Point): boolean {
+  return a[0] === b[0] && a[1] === b[1]
 }

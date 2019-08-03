@@ -2,13 +2,12 @@
  * @module 2018_day09
  */
 import { Link } from '../helpers/list.linked'
-import { Answer } from '../types/advent'
 
-export function game1 (players: number, lastMarble: number): Answer {
+export function game1 (players: number, lastMarble: number): number {
   return highestScore(playGame(players, lastMarble))
 }
 
-export function game2 (players: number, lastMarble: number): Answer {
+export function game2 (players: number, lastMarble: number): number {
   return highestScore(playGame(players, 100 * lastMarble))
 }
 

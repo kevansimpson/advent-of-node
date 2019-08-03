@@ -1,9 +1,8 @@
 /**
  * @module 2018_day02
  */
-import { Answer } from '../types/advent'
 
-export function checksum (input: string[]): Answer {
+export function checksum (input: string[]): number {
   let two = 0
   let three = 0
   input.map(countPairsAndTriples)
@@ -33,7 +32,7 @@ export function countPairsAndTriples (text: string): any {
   return counts
 }
 
-export function findPrototype (input: string[]): Answer {
+export function findPrototype (input: string[]): string {
   const len = input.length
   const distance = require('fast-levenshtein')
 

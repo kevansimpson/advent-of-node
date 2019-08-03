@@ -2,7 +2,6 @@
  * @module 2018_day03
  */
 import { key } from '../helpers/point'
-import { Answer } from '../types/advent'
 
 export type Claim = {
   id: number
@@ -39,7 +38,7 @@ export function buildClaimGrid (claims: string[]): Grid {
   return new Grid(grid, list)
 }
 
-export function calculateOverlap (grid: Map<string, number[]>): Answer {
+export function calculateOverlap (grid: Map<string, number[]>): number {
   let sum = 0
   for (let val of grid.values()) {
     sum += (val.length > 1) ? 1 : 0
@@ -48,7 +47,7 @@ export function calculateOverlap (grid: Map<string, number[]>): Answer {
   return sum
 }
 
-export function findAdjacentClaimId (grid: Grid): Answer {
+export function findAdjacentClaimId (grid: Grid): number {
   const points: string[] = []
   const exclude: Set<Number> = new Set()
 
