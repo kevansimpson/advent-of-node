@@ -26,6 +26,8 @@ import { MovingPoint, alignStars, toMovingPoints } from '../src/2018/day10'
 import * as d10 from '../src/2018/day10.doc'
 import { findMostPowerfulSquareFromSerial, findTopLeftOfMostPowerfulSquare } from '../src/2018/day11'
 import * as d11 from '../src/2018/day11.doc'
+import { sumGrowth } from '../src/2018/day12'
+import * as d12 from '../src/2018/day12.doc'
 
 describe('2018 solutions', () => {
   const testPath = path.join(__dirname, 'resources/2018') 
@@ -171,6 +173,15 @@ describe('2018 solutions', () => {
       end('findMostPowerfulSquareFromSerial')
       done()
     }).timeout(5000 * 4) // 20s, takes about 15s
+  })
+
+  it('Day12', (done) => {
+    start('sumGrowth20')
+    assert.strictEqual(sumGrowth(20), d12.part1)
+    end('sumGrowth20', 'sumMaxGrowth')
+    assert.strictEqual(sumGrowth(50000000000), d12.part2)
+    end('sumMaxGrowth')
+    done()
   })
 
 })

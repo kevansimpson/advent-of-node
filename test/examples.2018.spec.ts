@@ -12,6 +12,7 @@ import { Node, buildTree, calculateRootNode, sumMetadata } from '../src/2018/day
 import { highestScore, playGame } from '../src/2018/day09'
 import { alignStars, toMovingPoints } from '../src/2018/day10'
 import { findMostPowerfulSquareFromSerial, findTopLeftOfMostPowerfulSquare, powerCell } from '../src/2018/day11'
+import { sumGrowth } from '../src/2018/day12'
 
 describe('2018 examples', () => {
   describe('Day 01', () => {
@@ -213,4 +214,9 @@ describe('2018 examples', () => {
     }).timeout(5000 * 9) // 45s timeout, typically takes around 30s
   })
 
+  describe('Day 12', () => {
+    it('should sum growth', () => {
+      assert.strictEqual(325, sumGrowth(20, './test/resources/2018/input12.example.txt'))
+    })
+  })
 })
