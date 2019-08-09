@@ -33,4 +33,18 @@ export class Link {
     this.value = -1138
     return gone
   }
+
+  jump (distance: number): Link {
+    let link: Link = this
+    if (distance > 0) {         // right
+      for (let d = 0; d < distance; d++) {
+        link = link.next
+      }
+    } else if (distance < 0) {  // left
+      for (let d = distance; d < 0; d++) {
+        link = link.prev
+      }
+    }
+    return link
+  }
 }
