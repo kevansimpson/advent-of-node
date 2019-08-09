@@ -4,8 +4,11 @@
 
 const indent: string = '                    '
 
-export function debug (): boolean {
-  return process.argv.includes('--advent')
+export function debug (...messages: string[]): boolean {
+  const flag = process.argv.includes('--advent')
+
+  if (flag && messages && messages.length > 0) messages.forEach(m => console.log(m))
+  return flag
 }
 
 export function start (name: string): void {

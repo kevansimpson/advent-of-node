@@ -28,6 +28,8 @@ import { findMostPowerfulSquareFromSerial, findTopLeftOfMostPowerfulSquare } fro
 import * as d11 from '../src/2018/day11.doc'
 import { sumGrowth } from '../src/2018/day12'
 import * as d12 from '../src/2018/day12.doc'
+import { RaceTrack, firstCrash, lastCar } from '../src/2018/day13'
+import * as d13 from '../src/2018/day13.doc'
 
 describe('2018 solutions', () => {
   const testPath = path.join(__dirname, 'resources/2018') 
@@ -182,6 +184,17 @@ describe('2018 solutions', () => {
     assert.strictEqual(sumGrowth(50000000000), d12.part2)
     end('sumMaxGrowth')
     done()
+  })
+
+  it('Day13', (done) => {
+    readLines(path.join(testPath, 'input13.txt'), (input: string[]) => {
+      start('firstCrash')
+      assert.deepStrictEqual(firstCrash(new RaceTrack(input)), d13.part1)
+      end('firstCrash', 'lastCar')
+      assert.deepStrictEqual(lastCar(new RaceTrack(input)), d13.part2)
+      end('lastCar')
+      done()
+    })
   })
 
 })

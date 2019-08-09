@@ -13,6 +13,7 @@ import { highestScore, playGame } from '../src/2018/day09'
 import { alignStars, toMovingPoints } from '../src/2018/day10'
 import { findMostPowerfulSquareFromSerial, findTopLeftOfMostPowerfulSquare, powerCell } from '../src/2018/day11'
 import { sumGrowth } from '../src/2018/day12'
+import { RaceTrack, firstCrash, lastCar } from '../src/2018/day13'
 
 describe('2018 examples', () => {
   describe('Day 01', () => {
@@ -217,6 +218,37 @@ describe('2018 examples', () => {
   describe('Day 12', () => {
     it('should sum growth', () => {
       assert.strictEqual(325, sumGrowth(20, './test/resources/2018/input12.example.txt'))
+    })
+  })
+
+  describe('Day 13', () => {
+    it('should identify first crash', () => {
+      const input: string[] = [
+        '/->-\\        ',
+        '|   |  /----\\',
+        '| /-+--+-\\  |',
+        '| | |  | v  |',
+        '\\-+-/  \\-+--/',
+        '  \\------/   '
+      ]
+      const rt: RaceTrack = new RaceTrack(input)
+      rt.display()
+      assert.deepStrictEqual(firstCrash(rt), [7, 3])
+    })
+
+    it('should find last car standing', () => {
+      const input: string[] = [
+        '/>-<\\  ',
+        '|   |  ',
+        '| /<+-\\',
+        '| | | v',
+       '\\>+</ |',
+        '  |   ^',
+        '  \\<->/'
+      ]
+      const rt: RaceTrack = new RaceTrack(input)
+      rt.display()
+      assert.deepStrictEqual(lastCar(rt), [6, 4])
     })
   })
 })
