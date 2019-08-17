@@ -94,7 +94,7 @@ export function calculateDuration (steps: Map<string, Step>, workers: number, of
     }
 
     // console.log(`COMPLETE => ${complete} => ELAPSED: ${elapsed}`)
-    if (elapsed > 983) console.log(`MGR => ${JSON.stringify(manager)}`)
+    // if (elapsed > 983) console.log(`MGR => ${JSON.stringify(manager)}`)
   }
 
   return elapsed

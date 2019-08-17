@@ -22,7 +22,7 @@ export function highestScore (scores: Map<number, number>): number {
 export function playGame (players: number, lastMarble: number): Map<number, number> {
   const scores: Map<number, number> = new Map()
 
-  let current: Link = new Link(0)
+  let current: Link<number> = new Link(0)
   current = current.push(new Link(1))
   for (let m = 2; m <= lastMarble; m++) {
     if ((m % 23) === 0) {

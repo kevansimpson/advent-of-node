@@ -1,9 +1,9 @@
-export class Link {
-  value: number
-  prev: Link
-  next: Link
+export class Link<T> {
+  value: T
+  prev: Link<T>
+  next: Link<T>
 
-  constructor (val: number) {
+  constructor (val: T) {
     this.value = val
     this.prev = this
     this.next = this
@@ -13,7 +13,7 @@ export class Link {
    * Appends element to the end of this list.
    * @param node The new element.
    */
-  push (node: Link): Link {
+  push (node: Link<T>): Link<T> {
     node.prev = this
     node.next = this.next
     this.next.prev = node
@@ -24,18 +24,17 @@ export class Link {
   /**
    * Removes and returns the first element in the list.
    */
-  shift (): Link {
+  shift (): Link<T> {
     this.prev.next = this.next
     this.next.prev = this.prev
     const gone = this.next
     this.prev = this
     this.next = this
-    this.value = -1138
     return gone
   }
 
-  jump (distance: number): Link {
-    let link: Link = this
+  jump (distance: number): Link<T> {
+    let link: Link<T> = this
     if (distance > 0) {         // right
       for (let d = 0; d < distance; d++) {
         link = link.next

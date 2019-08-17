@@ -10,7 +10,7 @@ import { checksum, findPrototype } from '../src/2018/day02'
 import * as d02 from '../src/2018/day02.doc'
 import { Grid, buildClaimGrid, calculateOverlap, findAdjacentClaimId } from '../src/2018/day03'
 import * as d03 from '../src/2018/day03.doc'
-import { parseRecords, strategy1, strategy2 } from '../src/2018/day04'
+import { Guard, parseRecords, strategy1, strategy2 } from '../src/2018/day04'
 import * as d04 from '../src/2018/day04.doc'
 import { buildReactionMap, formPolymer, improvePolymer } from '../src/2018/day05'
 import * as d05 from '../src/2018/day05.doc'
@@ -30,9 +30,11 @@ import { sumGrowth } from '../src/2018/day12'
 import * as d12 from '../src/2018/day12.doc'
 import { RaceTrack, firstCrash, lastCar } from '../src/2018/day13'
 import * as d13 from '../src/2018/day13.doc'
+import { makeBackwardsRecipes, makeRecipes } from '../src/2018/day14'
+import * as d14 from '../src/2018/day14.doc'
 
 describe('2018 solutions', () => {
-  const testPath = path.join(__dirname, 'resources/2018') 
+  const testPath = path.join(__dirname, 'resources/2018')
 
   before(() => {
     start('2018')
@@ -42,159 +44,110 @@ describe('2018 solutions', () => {
     end('2018')
   })
 
-  it('Day01', (done) => {
-    readNumbers(path.join(testPath, 'input01.txt'), (input: number[]) => {
-      start('sum')
-      assert.strictEqual(sum(input), d01.part1)
-      end('sum', 'findDuplicateFrequency')
-      assert.strictEqual(findDuplicateFrequency(input), d01.part2)
-      end('findDuplicateFrequency')
-      done()
-    })
+  context('Day01', async () => {
+    const input = readNumbers(path.join(testPath, 'input01.txt'))
+    it('sum', async () => assert.strictEqual(sum(input), d01.part1))
+    it('findDuplicateFrequency', async () => assert.strictEqual(findDuplicateFrequency(input), d01.part2))
   })
 
-  it('Day02 ', (done) => {
-    readLines(path.join(testPath, 'input02.txt'), (input: string[]) => {
-      start('checksum')
-      assert.strictEqual(checksum(input), d02.part1)
-      end('checksum', 'findPrototype')
-      assert.strictEqual(findPrototype(input), d02.part2)
-      end('findPrototype')
-      done()
-    })
+  context('Day02', async () => {
+    const input = readLines(path.join(testPath, 'input02.txt'))
+    it('checksum', async () => assert.strictEqual(checksum(input), d02.part1))
+    it('findPrototype', async () => assert.strictEqual(findPrototype(input), d02.part2))
   })
 
-  it('Day03', (done) => {
-    readLines(path.join(testPath, 'input03.txt'), (input: string[]) => {
-      start('buildClaimGrid')
-      const grid: Grid = buildClaimGrid(input.reverse())
-      end('buildClaimGrid', 'calculateOverlap')
-      assert.strictEqual(calculateOverlap(grid.map), d03.part1)
-      end('calculateOverlap', 'findAdjacentClaimId')
-      assert.strictEqual(findAdjacentClaimId(grid), d03.part2)
-      end('findAdjacentClaimId')
-      done()
-    })
+  context('Day03', async () => {
+    const input = readLines(path.join(testPath, 'input03.txt'))
+    let grid: Grid
+    it('buildClaimGrid', async () => grid = buildClaimGrid(input.reverse()))
+    it('calculateOverlap', async () => assert.strictEqual(calculateOverlap(grid.map), d03.part1))
+    it('findAdjacentClaimId', async () => assert.strictEqual(findAdjacentClaimId(grid), d03.part2))
   })
 
-  it('Day04', (done) => {
-    readLines(path.join(testPath, 'input04.txt'), (input: string[]) => {
-      start('parseRecords')
-      const records = parseRecords(input.sort())
-      end('parseRecords', 'strategy1')
-      assert.strictEqual(strategy1(records), d04.part1)
-      end('strategy1', 'strategy2')
-      assert.strictEqual(strategy2(records), d04.part2)
-      end('strategy2')
-      done()
-    })
+  context('Day04', async () => {
+    const input = readLines(path.join(testPath, 'input04.txt'))
+    let records: Map<number, Guard>
+    it('parseRecords', async () => records = parseRecords(input.sort()))
+    it('strategy1', async () => assert.strictEqual(strategy1(records), d04.part1))
+    it('strategy2', async () => assert.strictEqual(strategy2(records), d04.part2))
   })
 
-  it('Day05', (done) => {
-    readString(path.join(testPath, 'input05.txt'), (input: string) => {
-      start('buildReactionMap')
-      const rxns: Map<string, string> = buildReactionMap()
-      end('buildReactionMap', 'formPolymer')
-      assert.strictEqual(formPolymer(input, rxns).toString().length, d05.part1)
-      end('formPolymer', 'improvePolymer')
-      assert.strictEqual(improvePolymer(input, rxns).toString().length, d05.part2)
-      end('improvePolymer')
-      done()
-    })
+  context('Day05', async () => {
+    const input = readString(path.join(testPath, 'input05.txt'))
+    let rxns: Map<string, string>
+    it('buildReactionMap', async () => rxns = buildReactionMap())
+    it('formPolymer', async () => assert.strictEqual(formPolymer(input, rxns).length, d05.part1))
+    it('improvePolymer', async () => assert.strictEqual(improvePolymer(input, rxns).length, d05.part2))
   })
 
-  it('Day06', (done) => {
-    readLines(path.join(testPath, 'input06.txt'), (input: string[]) => {
-      start('toPoints')
-      const points: Point[] = toPoints(input)
-      end('toPoints', 'findLargestArea')
-      assert.strictEqual(findLargestArea(points), d06.part1)
-      end('findLargestArea', 'findSafestArea')
-      assert.strictEqual(findSafestArea(points), d06.part2)
-      end('findSafestArea')
-      done()
-    })
+  context('Day06', async () => {
+    const input = readLines(path.join(testPath, 'input06.txt'))
+    let points: Point[]
+    it('toPoints', async () => points = toPoints(input))
+    it('findLargestArea', async () => assert.strictEqual(findLargestArea(points), d06.part1))
+    it('findSafestArea', async () => assert.strictEqual(findSafestArea(points), d06.part2))
   })
 
-  it.skip('Day07', (done) => {
-    readLines(path.join(testPath, 'input07.txt'), (input: string[]) => {
-      console.log(input.length)
-      start('orderInstructions')
+  context('Day07', async () => {
+    const input = readLines(path.join(testPath, 'input07.txt'))
+    it('orderInstructions', async () => {
       assert.strictEqual(orderInstructions(buildStepMap(input)), d07.part1)
-      end('orderInstructions', 'calculateDuration')
+    })
+    it.skip('calculateDuration', async () => { // fails :(
       assert.strictEqual(calculateDuration(buildStepMap(input), 5, 60), d07.part2)
-      end('calculateDuration')
-      done()
     })
   })
 
-  it('Day08', (done) => {
-    splitNumbers (path.join(testPath, 'input08.txt'), (input: number[]) => {
-      start('buildTree')
-      const tree: [Node, number] = buildTree(input, 0)
-      end('buildTree', 'sumMetadata')
-      assert.strictEqual(sumMetadata(tree), d08.part1)
-      end('sumMetadata', 'calculateRootNode')
-      assert.strictEqual(calculateRootNode(tree), d08.part2)
-      end('calculateRootNode')
-      done()
-    })
+  context('Day08', async () => {
+    const input = splitNumbers(path.join(testPath, 'input08.txt'))
+    let tree: [Node, number]
+    it('buildTree', async () => tree = buildTree(input, 0))
+    it('sumMetadata', async () => assert.strictEqual(sumMetadata(tree), d08.part1))
+    it('calculateRootNode', async () => assert.strictEqual(calculateRootNode(tree), d08.part2))
   })
 
-  it('Day09', (done) => {
-    start('game1')
-    assert.strictEqual(game1(d09.players, d09.lastMarble), d09.part1)
-    end('game1', 'game2')
-    assert.strictEqual(game2(d09.players, d09.lastMarble), d09.part2)
-    end('game2')
-    done()
+  context('Day09', async () => {
+    it('game1', async () => assert.strictEqual(game1(d09.players, d09.lastMarble), d09.part1))
+    it('game2', async () => assert.strictEqual(game2(d09.players, d09.lastMarble), d09.part2))
   })
 
-  it('Day10', (done) => {
-    readLines(path.join(testPath, 'input10.txt'), (input: string[]) => {
-      start('toMovingPoints')
-      const points: MovingPoint[] = toMovingPoints(input)
-      end('toMovingPoints', 'alignStars')
-      assert.strictEqual(alignStars(points, 20), d10.part2)
-      end('alignStars')
-      done()
-    })
+  context('Day10', async () => {
+    const input = readLines(path.join(testPath, 'input10.txt'))
+    let points: MovingPoint[]
+    it('toMovingPoints', async () => points = toMovingPoints(input))
+    it('alignStars', async () => assert.strictEqual(alignStars(points, 20), d10.part2))
   })
 
-  describe('Day11', () => {
-    it('findTopLeftOfMostPowerfulSquare', (done) => {
-      start('findTopLeftOfMostPowerfulSquare')
+  context('Day11', () => {
+    it('findTopLeftOfMostPowerfulSquare', async () => {
       assert.deepStrictEqual(findTopLeftOfMostPowerfulSquare(d11.input, 3, 0), d11.part1)
-      end('findTopLeftOfMostPowerfulSquare')
-      done()
     })
-
-    it.skip('findMostPowerfulSquareFromSerial', (done) => {
-      start('findMostPowerfulSquareFromSerial')
+    it.skip('findMostPowerfulSquareFromSerial', async () => {
       assert.deepStrictEqual(findMostPowerfulSquareFromSerial(d11.input), d11.part2)
-      end('findMostPowerfulSquareFromSerial')
-      done()
-    }).timeout(5000 * 4) // 20s, takes about 15s
+    }).timeout(20 * 1000) // 20s, takes about 15s
   })
 
-  it('Day12', (done) => {
-    start('sumGrowth20')
-    assert.strictEqual(sumGrowth(20), d12.part1)
-    end('sumGrowth20', 'sumMaxGrowth')
-    assert.strictEqual(sumGrowth(50000000000), d12.part2)
-    end('sumMaxGrowth')
-    done()
+  context('Day12', async () => {
+    it('sumGrowth20', async () => assert.strictEqual(sumGrowth(20), d12.part1))
+    it('sumMaxGrowth', async () => assert.strictEqual(sumGrowth(50000000000), d12.part2))
   })
 
-  it('Day13', (done) => {
-    readLines(path.join(testPath, 'input13.txt'), (input: string[]) => {
-      start('firstCrash')
-      assert.deepStrictEqual(firstCrash(new RaceTrack(input)), d13.part1)
-      end('firstCrash', 'lastCar')
-      assert.deepStrictEqual(lastCar(new RaceTrack(input)), d13.part2)
-      end('lastCar')
+  context('Day13', async () => {
+    const input = readLines(path.join(testPath, 'input13.txt'))
+    it('firstCrash', async () => assert.deepStrictEqual(firstCrash(new RaceTrack(input)), d13.part1))
+    it('lastCar', async () => assert.deepStrictEqual(lastCar(new RaceTrack(input)), d13.part2))
+  })
+
+  describe('Day14', () => {
+    it('makeRecipes', (done) => {
+      assert.strictEqual(makeRecipes(d14.input), d14.part1)
       done()
     })
+
+    it.skip('makeBackwardsRecipes', (done) => {
+      assert.strictEqual(makeBackwardsRecipes(d14.input.toString()), d14.part2)
+      done()
+    }).timeout(45 * 1000) // 45s, takes about 30s
   })
 
 })

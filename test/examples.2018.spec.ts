@@ -14,6 +14,7 @@ import { alignStars, toMovingPoints } from '../src/2018/day10'
 import { findMostPowerfulSquareFromSerial, findTopLeftOfMostPowerfulSquare, powerCell } from '../src/2018/day11'
 import { sumGrowth } from '../src/2018/day12'
 import { RaceTrack, firstCrash, lastCar } from '../src/2018/day13'
+import { makeBackwardsRecipes, makeRecipes } from '../src/2018/day14'
 
 describe('2018 examples', () => {
   describe('Day 01', () => {
@@ -249,6 +250,22 @@ describe('2018 examples', () => {
       const rt: RaceTrack = new RaceTrack(input)
       rt.display()
       assert.deepStrictEqual(lastCar(rt), [6, 4])
+    })
+  })
+
+  describe('Day 14', () => {
+    it('should make recipes', () => {
+      assert.strictEqual('5158916779', makeRecipes(9))
+      assert.strictEqual('0124515891', makeRecipes(5))
+      assert.strictEqual('9251071085', makeRecipes(18))
+      assert.strictEqual('5941429882', makeRecipes(2018))
+    })
+
+    it('should make backwards recipes', () => {
+      assert.strictEqual(9, makeBackwardsRecipes('51589'))
+      assert.strictEqual(5, makeBackwardsRecipes('01245'))
+      assert.strictEqual(18, makeBackwardsRecipes('92510'))
+      assert.strictEqual(2018, makeBackwardsRecipes('59414'))
     })
   })
 })
