@@ -15,9 +15,10 @@ import { findMostPowerfulSquareFromSerial, findTopLeftOfMostPowerfulSquare, powe
 import { sumGrowth } from '../src/2018/day12'
 import { RaceTrack, firstCrash, lastCar } from '../src/2018/day13'
 import { makeBackwardsRecipes, makeRecipes } from '../src/2018/day14'
+import { fightGoblins } from '../src/2018/day15'
 
 describe('2018 examples', () => {
-  describe('Day 01', () => {
+  context('Day 01', async () => {
     it('should return correct sum', () => {
       assert.strictEqual(sum([1, 1, 1]), 3)
       assert.strictEqual(sum([1, 1, -2]), 0)
@@ -32,7 +33,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 02', () => {
+  context('Day 02', async () => {
     it('should count pairs and triples', () => {
       assert.deepEqual(countPairsAndTriples('abcdef'), {a: 1, b: 1, c: 1, d: 1, e: 1, f: 1})
       assert.deepEqual(countPairsAndTriples('bababc'), {b: 3, a: 2, c: 1})
@@ -49,7 +50,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 03', () => {
+  context('Day 03', async () => {
     it('should parse Claim', () => {
       const claim: Claim = parseClaim('#123 @ 3,2: 5x4')
       assert.strictEqual(claim.id, 123)
@@ -72,7 +73,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 04', () => {
+  context('Day 04', async () => {
     const input: string[] = [
       '[1518-11-01 00:00] Guard #10 begins shift',
       '[1518-11-01 00:05] falls asleep',
@@ -106,7 +107,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 05', () => {
+  context('Day 05', async () => {
     const rxns: Map<string, string> = buildReactionMap()
     it('should return polymer', () => {
       assert.strictEqual(formPolymer('aA', rxns), '')
@@ -121,7 +122,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 06', () => {
+  context('Day 06', async () => {
     const points: Point[] = toPoints(['1, 1', '1, 6', '8, 3', '3, 4', '5, 5', '8, 9'])
     it('should find largest area', () => {
       assert.strictEqual(findLargestArea(points), 17)
@@ -132,7 +133,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 07', () => {
+  context('Day 07', async () => {
     const input = [
       'Step C must be finished before step A can begin.',
       'Step C must be finished before step F can begin.',
@@ -152,7 +153,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 08', () => {
+  context('Day 08', async () => {
     const input = [2, 3, 0, 3, 10, 11, 12, 1, 1, 0, 1, 99, 2, 1, 1, 2]
     const tree: [Node, number] = buildTree(input, 0)
 
@@ -165,7 +166,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 09', () => {
+  context('Day 09', async () => {
     it('should score game correctly', () => {
       assert.strictEqual(highestScore(playGame(9, 25)), 32)
       assert.strictEqual(highestScore(playGame(10, 1618)), 8317)
@@ -176,7 +177,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 10', () => {
+  context('Day 10', async () => {
     it('should identify word in the stars', () => {
       const input = [
         'position=< 9,  1> velocity=< 0,  2>', 'position=< 7,  0> velocity=<-1,  0>',
@@ -200,7 +201,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 11', () => {
+  context('Day 11', async () => {
     it('should identify most powerful buildings', () => {
       assert.strictEqual(powerCell([3, 5], 8)[2], 4)
       assert.strictEqual(powerCell([122, 79], 57)[2], -5)
@@ -216,13 +217,13 @@ describe('2018 examples', () => {
     }).timeout(5000 * 9) // 45s timeout, typically takes around 30s
   })
 
-  describe('Day 12', () => {
+  context('Day 12', async () => {
     it('should sum growth', () => {
       assert.strictEqual(325, sumGrowth(20, './test/resources/2018/input12.example.txt'))
     })
   })
 
-  describe('Day 13', () => {
+  context('Day 13', async () => {
     it('should identify first crash', () => {
       const input: string[] = [
         '/->-\\        ',
@@ -253,7 +254,7 @@ describe('2018 examples', () => {
     })
   })
 
-  describe('Day 14', () => {
+  context('Day 14', async () => {
     it('should make recipes', () => {
       assert.strictEqual('5158916779', makeRecipes(9))
       assert.strictEqual('0124515891', makeRecipes(5))
@@ -266,6 +267,26 @@ describe('2018 examples', () => {
       assert.strictEqual(5, makeBackwardsRecipes('01245'))
       assert.strictEqual(18, makeBackwardsRecipes('92510'))
       assert.strictEqual(2018, makeBackwardsRecipes('59414'))
+    })
+  })
+
+  context('Day 15', async () => {
+    it('should fight goblins example detailed', () => {
+      const g = ['#######', '#.G...#', '#...EG#', '#.#.#G#', '#..G#E#', '#.....#', '#######']
+      const a = fightGoblins(g)
+      assert.deepStrictEqual(a, { rounds: 47, damage: 590, outcome: 27730 })
+    })
+
+    it('should fight goblins example 1', () => {
+      const g = ['#######', '#G..#E#', '#E#E.E#', '#G.##.#', '#...#E#', '#...E.#', '#######']
+      const a = fightGoblins(g)
+      assert.deepStrictEqual(a, { rounds: 37, damage: 982, outcome: 36334 })
+    })
+
+    it('should fight goblins example 2', () => {
+      const g = ['#######', '#E..EG#', '#.#G.E#', '#E.##E#', '#G..#.#', '#..E#.#', '#######']
+      const a = fightGoblins(g)
+      assert.deepStrictEqual(a, { rounds: 46, damage: 859, outcome: 39514 })
     })
   })
 })

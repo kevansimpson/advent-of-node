@@ -32,6 +32,8 @@ import { RaceTrack, firstCrash, lastCar } from '../src/2018/day13'
 import * as d13 from '../src/2018/day13.doc'
 import { makeBackwardsRecipes, makeRecipes } from '../src/2018/day14'
 import * as d14 from '../src/2018/day14.doc'
+import { fastBattle } from '../src/2018/day15'
+import * as d15 from '../src/2018/day15.doc'
 
 describe('2018 solutions', () => {
   const testPath = path.join(__dirname, 'resources/2018')
@@ -148,6 +150,13 @@ describe('2018 solutions', () => {
       assert.strictEqual(makeBackwardsRecipes(d14.input.toString()), d14.part2)
       done()
     }).timeout(45 * 1000) // 45s, takes about 30s
+  })
+
+  describe.skip('Day15', () => {
+    it('elf v goblin', (done) => {
+      assert.deepStrictEqual(fastBattle(), [d15.part1, d15.part2])
+      done()
+    }).timeout(15 * 1000) // 15s
   })
 
 })

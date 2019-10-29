@@ -33,7 +33,6 @@ export function lastCar (rt: RaceTrack): Point {
         const possibleCollision = toKey(car.location)
         const other = cars.get(possibleCollision)
         if (other && other.id !== car.id) {
-          debug(`REMOVING => ${car.id} & ${other.id} @ ${possibleCollision}`)
           cars.delete(possibleCollision) // remove other car
         } else cars.set(possibleCollision, car)
       } else debug(`Ghost Car${car.id}`)
@@ -87,7 +86,6 @@ const turns: { [dir: string]: Direction }[] = [
 function findCars (rt: RaceTrack): Map<string, Car> {
   const cars: Map<string, Car> = new Map()
   let id = 0
-  debug(`FIND => ${rt.height} x ${rt.width}`)
   for (let h = 0; h < rt.height; h++) {
     for (let w = 0; w < rt.width; w++) {
       const pt: string = rt.course[h][w]
