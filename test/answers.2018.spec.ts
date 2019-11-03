@@ -34,6 +34,8 @@ import { makeBackwardsRecipes, makeRecipes } from '../src/2018/day14'
 import * as d14 from '../src/2018/day14.doc'
 import { fastBattle } from '../src/2018/day15'
 import * as d15 from '../src/2018/day15.doc'
+import { OpCodeMap, countAmbiguous, monitorCPU } from '../src/2018/day16'
+import * as d16 from '../src/2018/day16.doc'
 
 describe('2018 solutions', () => {
   const testPath = path.join(__dirname, 'resources/2018')
@@ -157,6 +159,15 @@ describe('2018 solutions', () => {
       assert.deepStrictEqual(fastBattle(), [d15.part1, d15.part2])
       done()
     }).timeout(15 * 1000) // 15s
+  })
+
+  context('Day16', async () => {
+    const input = readLines(path.join(testPath, 'input16.txt'))
+    const cpu = monitorCPU(input)
+    const ambiguous = countAmbiguous(cpu)
+    it('countAmbiguous', async () => assert.strictEqual(ambiguous[0], d16.part1))
+    const map: OpCodeMap = cpu.differentiateCodes(ambiguous[1])
+    it('processInstructions', async () => assert.deepStrictEqual(cpu.processInstructions(map), d16.part2))
   })
 
 })

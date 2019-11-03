@@ -16,6 +16,7 @@ import { sumGrowth } from '../src/2018/day12'
 import { RaceTrack, firstCrash, lastCar } from '../src/2018/day13'
 import { makeBackwardsRecipes, makeRecipes } from '../src/2018/day14'
 import { fightGoblins } from '../src/2018/day15'
+import { CPU, OperationMatches, countAmbiguous, monitorCPU } from '../src/2018/day16'
 
 describe('2018 examples', () => {
   context('Day 01', async () => {
@@ -287,6 +288,24 @@ describe('2018 examples', () => {
       const g = ['#######', '#E..EG#', '#.#G.E#', '#E.##E#', '#G..#.#', '#..E#.#', '#######']
       const a = fightGoblins(g)
       assert.deepStrictEqual(a, { rounds: 46, damage: 859, outcome: 39514 })
+    })
+  })
+
+  context('Day 16', async () => {
+    it('monitor cpu + count ambiguous', async () => {
+      const input = `Before: [3, 2, 1, 1]
+9 2 1 2
+After:  [3, 2, 2, 1]`
+      const cpu: CPU = monitorCPU(input.split(/\n/g))
+      const expected = new CPU()
+      expected.monitors.push({
+        before: [3, 2, 1, 1],
+        after: [3, 2, 2, 1],
+        instruction: [9, 2, 1, 2]
+      })
+      assert.deepStrictEqual(cpu, expected)
+      const ambiguous: [number, OperationMatches] = countAmbiguous(cpu)
+      assert.strictEqual(ambiguous[0], 1)
     })
   })
 })
