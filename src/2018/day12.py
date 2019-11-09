@@ -22,7 +22,7 @@ def grow_plants(iterations, current_gen):
 find_sum = lambda neg, pos, gen: sum(k + neg + pos for k in range(len(gen)) if gen[k] == '#')
 
 import sys
-filename = sys.argv[2] if (len(sys.argv) > 2) else "./test/resources/2018/input12.txt"
+filename = sys.argv[2] if (len(sys.argv) > 2) else "./test/2018/input12.txt"
 data = open(filename).read().strip().splitlines()
 plants = data[0].strip("initial state: ")
 d = {}

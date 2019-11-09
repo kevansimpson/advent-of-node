@@ -2,6 +2,8 @@
  * @module helpers
  */
 
+export type Direction = '^' | 'v' | '<' | '>'
+
 export type Point = [ number, number ]
 
 export function key (x: number, y: number): string {
@@ -25,4 +27,13 @@ export function manhattanDistance (a: Point, b: Point): number {
 
 export function samePoint (a: Point, b: Point): boolean {
   return a[0] === b[0] && a[1] === b[1]
+}
+
+export function move (start: Point, dir: Direction): Point {
+  switch (dir) {
+    case '<': return [ start[0] - 1, start[1] ]
+    case '>': return [ start[0] + 1, start[1] ]
+    case '^': return [ start[0], start[1] - 1 ]
+    case 'v': return [ start[0], start[1] + 1 ]
+  }
 }

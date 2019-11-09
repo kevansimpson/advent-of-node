@@ -1,7 +1,7 @@
 /**
  * @module 2018_day13
  */
-import { Point, key, toKey } from '../helpers/point'
+import { Direction, Point, key, toKey } from '../helpers/point'
 import { debug, modulo } from '../helpers/util'
 
 export function firstCrash (rt: RaceTrack): Point {
@@ -128,8 +128,6 @@ function move (car: Car): Point {
 
   return next
 }
-
-type Direction = '^' | 'v' | '<' | '>'
 
 class Car {
   id: number
