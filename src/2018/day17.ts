@@ -44,16 +44,6 @@ export class Reservoir {
   maxY: number = -1
   drops: Set<string> = new Set()
 
-  waterCanReach (): number {
-    return Object.keys(this.ground)
-      .filter(key => {
-        const ground = this.ground[key]
-        const y = +(key.split(',')[1].replace(']',''))
-        if (y < this.minY) return false
-        return (ground === Square.PATH || ground === Square.WATER)
-      }).length
-  }
-
   water (): { 'water': number, 'path': number } {
     return Object.keys(this.ground).reduce((total, key) => {
       const y = +(key.split(',')[1].replace(']',''))

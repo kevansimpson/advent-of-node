@@ -25,10 +25,6 @@ export function manhattanDistance (a: Point, b: Point): number {
   return Math.abs(b[0] - a[0]) + Math.abs(b[1] - a[1])
 }
 
-export function samePoint (a: Point, b: Point): boolean {
-  return a[0] === b[0] && a[1] === b[1]
-}
-
 export function move (start: Point, dir: Direction): Point {
   switch (dir) {
     case '<': return [ start[0] - 1, start[1] ]
@@ -36,4 +32,18 @@ export function move (start: Point, dir: Direction): Point {
     case '^': return [ start[0], start[1] - 1 ]
     case 'v': return [ start[0], start[1] + 1 ]
   }
+}
+
+export function samePoint (a: Point, b: Point): boolean {
+  return a[0] === b[0] && a[1] === b[1]
+}
+
+export function surrounding (pt: Point): Point[] {
+  const [x, y] = pt
+  return [
+    [x - 1, y - 1], [x, y - 1], [x + 1, y - 1],
+    [x - 1, y], [x + 1, y],
+    [x - 1, y + 1], [x, y + 1], [x + 1, y + 1]
+  ]
+
 }
