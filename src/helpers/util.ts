@@ -4,6 +4,8 @@
 
 const indent: string = '                    '
 
+export const NumberComparator = (a: number, b: number) => a - b
+
 export function debug (...messages: string[]): boolean {
   const flag = process.argv.includes('--advent')
 

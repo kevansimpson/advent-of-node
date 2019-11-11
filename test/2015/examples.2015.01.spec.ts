@@ -2,7 +2,7 @@ import assert from 'assert';
 import 'mocha'
 import { findFloor, firstEntersBasement } from '../../src/2015/day01'
 
-describe('2018 examples - Day 01', () => {
+describe('2015 examples - Day 01', () => {
   it('findFloor', () => {
     assert.strictEqual(findFloor('(())'), 0)
     assert.strictEqual(findFloor('()()'), 0)
