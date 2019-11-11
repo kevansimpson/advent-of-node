@@ -6,6 +6,8 @@ export type Direction = '^' | 'v' | '<' | '>'
 
 export type Point = [ number, number ]
 
+export const ORIGIN: Point = [0, 0]
+
 export function key (x: number, y: number): string {
   return `[${x},${y}]`
 }
