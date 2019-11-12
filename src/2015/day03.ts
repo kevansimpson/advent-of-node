@@ -21,7 +21,8 @@ export function followDirections (directions: string, startIndex: number = 0, in
   presents[toKey(position)] = 1
 
   const steps = directions.split('')
-  for (let ix = startIndex, max = steps.length; ix < max; ix += increment) {
+  const max = steps.length
+  for (let ix = startIndex; ix < max; ix += increment) {
     position = move(position, steps[ix] as Direction)
     presents[toKey(position)] = 1
   }
