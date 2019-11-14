@@ -1,25 +1,26 @@
 /**
  * @module 2015_day06
  */
-import { toPoint, key, Point } from '../helpers/point'
+import { toPoint, Point } from '../helpers/point'
+import { array2D, sum } from '../helpers/util'
 
 export function countLightsOn (directions: string[]): number {
-  const lightGrid: LightGrid = {}
+  const lightGrid: LightGrid = array2D(1000, 0)
 
   for (const directive of directions) {
     const [cmd, start, end] = readDirective(directive)
     for (let x = start[0]; x <= end[0]; x++) {
+      const row = lightGrid[x]
       for (let y = start[1]; y <= end[1]; y++) {
-        const xy = key(x, y)
         switch (cmd) {
           case Cmd.on:
-            lightGrid[xy] = 1
+            row[y] = 1
             break
           case Cmd.off:
-            lightGrid[xy] = 0
+            row[y] = 0
             break
           case Cmd.toggle:
-            lightGrid[xy] = lightGrid[xy] === 1 ? 0 : 1
+            row[y] = (row[y] === 1) ? 0 : 1
             break
         }
       }
@@ -30,23 +31,23 @@ export function countLightsOn (directions: string[]): number {
 }
 
 export function totalBrightness (directions: string[]): number {
-  const lightGrid: LightGrid = {}
+  const lightGrid: LightGrid = array2D(1000, 0)
 
   for (const directive of directions) {
     const [cmd, start, end] = readDirective(directive)
     for (let x = start[0]; x <= end[0]; x++) {
+      const row = lightGrid[x]
       for (let y = start[1]; y <= end[1]; y++) {
-        const xy = key(x, y)
-        const val = lightGrid[xy] || 0
+        const val = row[y] || 0
         switch (cmd) {
           case Cmd.on:
-            lightGrid[xy] = val + 1
+            row[y] = val + 1
             break
           case Cmd.off:
-            if (val > 0) lightGrid[xy] = val - 1
+            if (val > 0) row[y] = val - 1
             break
           case Cmd.toggle:
-            lightGrid[xy] = val + 2
+            row[y] = val + 2
             break
         }
       }
@@ -75,7 +76,7 @@ function readDirective (directive: string): Directive {
 }
 
 function tallyLightGrid (grid: LightGrid) {
-  return Object.values(grid).reduce((a, b) => a + b, 0)
+  return Object.values(grid).reduce((a, b) => a + sum(b), 0)
 }
 
 // case-sensitive, to match input
@@ -84,6 +85,7 @@ enum Cmd {
   off = 'off',
   toggle = 'toggle'
 }
-type LightGrid = { [pt: string]: number }
+
+type LightGrid = Array<number[]>
 
 type Directive = [ Cmd, Point, Point ]

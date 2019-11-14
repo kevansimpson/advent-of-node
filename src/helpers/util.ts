@@ -6,6 +6,10 @@ const indent: string = '                    '
 
 export const NumberComparator = (a: number, b: number) => a - b
 
+export function array2D<T> (size: number, value: T): T[][] {
+  return Array.from(Array(size), _ => Array(size).fill((typeof value === 'function') ? value() : value))
+}
+
 export function debug (...messages: string[]): boolean {
   const flag = process.argv.includes('--advent')
 

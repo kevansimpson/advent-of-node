@@ -2,7 +2,7 @@ import assert from 'assert';
 import 'mocha'
 import { countLightsOn, totalBrightness } from '../../src/2015/day06'
 
-describe.only('2015 examples - Day 06', () => {
+describe('2015 examples - Day 06', () => {
   it('counts lights', () => {
     const input = [
       'turn on 0,0 through 999,999',
