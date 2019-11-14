@@ -16,6 +16,11 @@ export function toKey (pt: Point): string {
   return `[${pt[0]},${pt[1]}]`
 }
 
+export function toPoint (key: string): Point {
+  const xy = key.replace(']', '').replace('[', '').split(',')
+  return [+xy[0], +xy[1]]
+}
+
 export function includes (list: Point[], target: Point): boolean {
   for (let pt of list) {
     if (samePoint(pt, target)) return true
