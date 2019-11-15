@@ -2,7 +2,7 @@ import assert from 'assert';
 import 'mocha'
 import { buildCircuitMap } from '../../src/2015/day07'
 
-describe.only('2015 examples - Day 07', () => {
+describe('2015 examples - Day 07', () => {
   it('signal A', () => {
     const input = [
       '123 -> x',
