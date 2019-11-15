@@ -44,3 +44,34 @@ export function modulo (numerator: number, denominator: number): number {
 export function sum (intArray: number[]): number {
   return intArray.reduce((a: number, b: number) => a + b)
 }
+
+/**
+ * Recursively builds all permutations of available list,
+ * applying the specified consumer when available list is empty.
+ *
+ * @param available All available items.
+ * @param permutation The current permutation of items under evaluation.
+ * @param noneAvailable The consumer to apply when there are no available items.
+ * @param <T> The type of item.
+ */
+export function buildAllPaths<T>(available: T[], permutation: T[], noneAvailable: Consumer<T[]>) {
+  if (available.length === 0) {
+    noneAvailable(permutation)
+    return
+  }
+
+  for (let i = 0; i < available.length; i++) {
+    const loc: T = available[i]
+    const remaining: T[] = []
+    available.slice(0, i).forEach(a => remaining.push(a))
+    // remaining.addAll(available.subList(0, i));
+    available.slice(i + 1, available.length).forEach(a => remaining.push(a))
+    // remaining.addAll(available.subList(i + 1, available.size()));
+
+    const newPerm: T[] = [...permutation]
+    newPerm.push(loc)
+    buildAllPaths(remaining, newPerm, noneAvailable)
+  }
+}
+
+type Consumer<T> = (input: T) => void
