@@ -2,7 +2,7 @@ import assert from 'assert';
 import 'mocha'
 import { sumDocument } from '../../src/2015/day12'
 
-describe.only('2015 examples - Day 12', () => {
+describe('2015 examples - Day 12', () => {
   it('sum document', () => {
     assert.strictEqual(sumDocument('[1,2,3]'), 6)
     assert.strictEqual(sumDocument('{"a":2,"b":4}'), 6)
