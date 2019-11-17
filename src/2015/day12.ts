@@ -1,5 +1,5 @@
 /**
- * @module 2015_day11
+ * @module 2015_day12
  */
 
 export function sumDocument(input: string, excluded: string[] = []): number {
