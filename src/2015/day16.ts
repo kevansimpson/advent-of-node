@@ -1,5 +1,5 @@
 /**
- * @module 2015_day15
+ * @module 2015_day16
  */
 import { tickerTape } from './day16.doc'
 
