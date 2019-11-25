@@ -2,7 +2,7 @@ import assert from 'assert'
 import 'mocha'
 import { lowestHouse, lowestHouseWithExtraPresent } from '../../src/2015/day20'
 
-describe.only('2015 examples - Day 20', () => {
+describe('2015 examples - Day 20', () => {
   it('lowest house', () => {
     assert.strictEqual(lowestHouse(70, 10), 4)
   })
