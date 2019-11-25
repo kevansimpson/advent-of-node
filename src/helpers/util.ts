@@ -54,7 +54,7 @@ export function sum (intArray: number[]): number {
  * @param noneAvailable The consumer to apply when there are no available items.
  * @param <T> The type of item.
  */
-export function buildAllPaths<T>(available: T[], permutation: T[], noneAvailable: Consumer<T[]>) {
+export function buildAllPaths<T> (available: T[], permutation: T[], noneAvailable: Consumer<T[]>) {
   if (available.length === 0) {
     noneAvailable(permutation)
     return

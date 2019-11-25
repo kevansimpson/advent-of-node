@@ -3,7 +3,7 @@
  */
 import { tickerTape } from './day16.doc'
 
-export function whichSue(sueList: string[]): number {
+export function whichSue (sueList: string[]): number {
   return compareSues(sueList, hasSameAttr)
 }
 
@@ -13,10 +13,10 @@ export function outdatedRetroencabulator (sueList: string[]) {
 
 const INDEX = 'index'
 
-function compareSues(sueList: string[], fxn: (tape: Sue, attr: Sue) => boolean): number {
+function compareSues (sueList: string[], fxn: (tape: Sue, attr: Sue) => boolean): number {
   const potentials: Sue[] = []
   for (const aSueList of sueList) {
-    const attr = parseSue(aSueList);
+    const attr = parseSue(aSueList)
     if (fxn(tickerTape, attr)) potentials.push(attr)
   }
 
@@ -81,7 +81,7 @@ function hasSameValues (attr1: Sue, attr2: Sue): boolean {
   return true
 }
 
-function parseSue(sue: string): Sue {
+function parseSue (sue: string): Sue {
   const attr: Sue = {}
   const m: RegExpMatchArray | null = sue.match(/^Sue (\d+): (\w+): (\d+), (\w+): (\d+), (\w+): (\d+)$/)
   if (m) {
@@ -89,8 +89,7 @@ function parseSue(sue: string): Sue {
     attr[m[2]] = +m[3]
     attr[m[4]] = +m[5]
     attr[m[6]] = +m[7]
-  }
-  else {
+  } else {
     throw new Error(`No match: ${sue}`)
   }
 

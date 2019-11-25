@@ -33,10 +33,10 @@ export class Chemist {
       - 2 * this.countOccurrences(this.medicine, 'Y') - 1
   }
 
-  applyAllReplacements(): void {
+  applyAllReplacements (): void {
     for (const replacement of Object.entries(this.replacements)) {
-        const uniqueMolecules = this.applyReplacement(this.medicine, replacement)
-        uniqueMolecules.forEach(um => this.molecules.add(um))
+      const uniqueMolecules = this.applyReplacement(this.medicine, replacement)
+      uniqueMolecules.forEach(um => this.molecules.add(um))
     }
   }
 
@@ -44,11 +44,12 @@ export class Chemist {
     const uniqueMolecules: Set<string> = new Set()
     for (const repl of replacement[1]) {
       let start = 0
-      let index
-      while ((index = chain.indexOf(replacement[0], start)) >= 0) {
-          const variation = chain.substring(0, index) + repl + chain.substring(index + replacement[0].length)
-          uniqueMolecules.add(variation)
-          start = index + replacement[0].length
+      let index = chain.indexOf(replacement[0], start)
+      while (index >= 0) {
+        const variation = chain.substring(0, index) + repl + chain.substring(index + replacement[0].length)
+        uniqueMolecules.add(variation)
+        start = index + replacement[0].length
+        index = chain.indexOf(replacement[0], start)
       }
     }
 
@@ -65,7 +66,7 @@ export class Chemist {
     return rmap
   }
 
-  countOccurrences(str: string, x: string): number {
+  countOccurrences (str: string, x: string): number {
     return str.split(x).length - 1
   }
 }

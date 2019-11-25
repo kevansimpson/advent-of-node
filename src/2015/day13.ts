@@ -3,7 +3,7 @@
  */
 import { buildAllPaths, debug } from '../helpers/util'
 
-export function optimalHappiness(input: string[], extras: string[] = []): number {
+export function optimalHappiness (input: string[], extras: string[] = []): number {
   return new Happiness(input, extras).calculateOptimal()
 }
 
@@ -14,12 +14,12 @@ class Happiness {
   distanceMap: Map<string, number> = new Map()
   jumpDistanceMap: Map<string, number>
 
-  constructor(input: string[], extras: string[] = []) {
+  constructor (input: string[], extras: string[] = []) {
     extras.forEach(ex => this.people.add(ex))
     this.jumpDistanceMap = this.buildDistanceMap(input)
   }
 
-  calculateOptimal(): number {
+  calculateOptimal (): number {
     const permutation: string[] = []
     const peoples = Array.from(this.people)
     buildAllPaths(peoples, permutation,
@@ -39,7 +39,7 @@ class Happiness {
     return longest
   }
 
-  calculateDistance(path: string[]): number {
+  calculateDistance (path: string[]): number {
     const last = path.length - 1
     let dist = this.getDelta(path[last], path[0]) + this.getDelta(path[0], path[last])
     for (let i = 0; i < last; i++) {
@@ -52,7 +52,7 @@ class Happiness {
     return dist
   }
 
-  getDelta(person1: string, person2: string): number {
+  getDelta (person1: string, person2: string): number {
     if (person1 === ME || person2 === ME) return 0
 
     const key = this.key(person1, person2)
@@ -61,7 +61,7 @@ class Happiness {
     else throw new Error(`getDelta(${person1}, ${person2})`)
   }
 
-  buildDistanceMap(directions: string[]): Map<string, number> {
+  buildDistanceMap (directions: string[]): Map<string, number> {
     const distanceMap: Map<string, number> = new Map()
     for (const directive of directions) {
       const dirs: string[] = directive.split(/\s/g)
@@ -76,7 +76,7 @@ class Happiness {
     return distanceMap
   }
 
-  key(loc1: string, loc2: string): string {
+  key (loc1: string, loc2: string): string {
     return `JUMP-${[loc1, loc2].toString()}`
   }
 }

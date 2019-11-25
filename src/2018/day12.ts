@@ -13,6 +13,6 @@
 export function sumGrowth (generations: number, inputFile?: string): number {
   const { execSync } = require('child_process')
   const param: string = (inputFile) ? ` ${inputFile}` : ''
-  const output: string = execSync(`python ./src/2018/day12.py ${generations}${param}`)
+  const output: string = execSync(`python3 ./src/2018/day12.py ${generations}${param}`)
   return +output
 }

@@ -2,7 +2,7 @@
  * @module 2015_day08
  */
 
-export function totalCharacters(directions: string[]): number {
+export function totalCharacters (directions: string[]): number {
   let inMemory = 0
   for (let line of directions) {
     line = line.trim().substring(1).slice(0, -1)
@@ -13,7 +13,7 @@ export function totalCharacters(directions: string[]): number {
   return inMemory
 }
 
-export function totalEncryptedCharacters(directions: string[]): number {
+export function totalEncryptedCharacters (directions: string[]): number {
   let encrypted = 0
   for (let line of directions) {
     line = line.trim().substring(1)
@@ -25,7 +25,7 @@ export function totalEncryptedCharacters(directions: string[]): number {
   return encrypted
 }
 
-function computeInMemory(line: string): number {
+function computeInMemory (line: string): number {
   const chars = line.split('')
   let count = 0
   let flag = 0
@@ -84,7 +84,7 @@ function computeInMemory(line: string): number {
   return count
 }
 
-function computeEncrypted(line: string): number {
+function computeEncrypted (line: string): number {
   const chars = line.split('')
   let count = 0
   let flag = 0
@@ -92,20 +92,21 @@ function computeEncrypted(line: string): number {
   for (const ch of chars) {
     switch (ch) {
       case '\\':
-        if (flag == 1) {
+        if (flag === 1) {
           count += 2    // escape
           flag = 0    // reset flag
-        } else
+        } else {
           flag = 1
+        }
         break
       case '"':
-        if (flag == 1) {
+        if (flag === 1) {
           count += 2    // escape
         }
         flag = 0    // reset flag
         break
       case 'x':
-        flag = flag == 1 ? 2 : 0
+        flag = flag === 1 ? 2 : 0
         break
       case '0':
       case '1':

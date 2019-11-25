@@ -8,7 +8,7 @@ export class PathFinder {
   distanceMap: { [key: string]: number } = {}
   jumpDistanceMap: { [key: string]: number } = {}
 
-  minMaxPaths(directions: string[]): [number, number] {
+  minMaxPaths (directions: string[]): [number, number] {
     this.jumpDistanceMap = this.buildDistanceMap(directions)
 
     const permutation: string[] = []
@@ -24,25 +24,26 @@ export class PathFinder {
     }, [Number.MAX_VALUE, Number.MIN_VALUE])
   }
 
-  calculateDistance(path: string[]): number {
+  calculateDistance (path: string[]): number {
     let dist = 0
     for (let i = 0; i < path.length - 1; i++) {
       const key = this.key(path[i], path[i + 1])
       const step = this.jumpDistanceMap[key]
-      if (step)
+      if (step) {
         dist += step
+      }
     }
 
     return dist
   }
 
-  buildDistanceMap(directions: string[]): { [key: string]: number } {
+  buildDistanceMap (directions: string[]): { [key: string]: number } {
     const distMap: { [key: string]: number } = {}
     for (const directive of directions) {
       const parts = directive.split(/\s/g)
       const city1 = parts[0]
       const city2 = parts[2]
-      const distance = Number.parseInt(parts[4])
+      const distance = +parts[4]
       this.locations.add(city1)
       this.locations.add(city2)
       distMap[this.key(city1, city2)] = distance
@@ -52,7 +53,7 @@ export class PathFinder {
     return distMap
   }
 
-  private key(loc1: string, loc2: string): string {
-    return "JUMP-" + ([loc1, loc2]).toString()
+  private key (loc1: string, loc2: string): string {
+    return 'JUMP-' + ([loc1, loc2]).toString()
   }
 }

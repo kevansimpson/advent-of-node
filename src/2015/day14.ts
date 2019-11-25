@@ -3,14 +3,14 @@
  */
 import { debug, modulo } from '../helpers/util'
 
-export function distanceTraveled(input: string[], seconds: number): number {
+export function distanceTraveled (input: string[], seconds: number): number {
   const speedMap = buildSpeedMap(input)
   const distanceMap = buildDistanceMap(speedMap, seconds)
 
   return lastKey(distanceMap)
 }
 
-export function winningPoints(input: string[], seconds: number): number {
+export function winningPoints (input: string[], seconds: number): number {
   const speedMap = buildSpeedMap(input)
   const pointMap: { [key: string]: string } = {}
 
@@ -32,12 +32,12 @@ export function winningPoints(input: string[], seconds: number): number {
   return highest
 }
 
-function identifyWinner(speedMap: SpeedMap, seconds: number): string[] {
+function identifyWinner (speedMap: SpeedMap, seconds: number): string[] {
   const distanceMap = buildDistanceMap(speedMap, seconds)
   return distanceMap[lastKey(distanceMap)]
 }
 
-function lastKey(distanceMap: DistanceMap): number {
+function lastKey (distanceMap: DistanceMap): number {
   const keys = Object.keys(distanceMap)
   let last = +keys[keys.length - 1]
   while (Number.isNaN(last)) {
@@ -47,7 +47,7 @@ function lastKey(distanceMap: DistanceMap): number {
   return last
 }
 
-function buildDistanceMap(speedMap: SpeedMap, seconds: number): DistanceMap {
+function buildDistanceMap (speedMap: SpeedMap, seconds: number): DistanceMap {
   const distanceMap: DistanceMap = {}
   for (const reindeer of Object.keys(speedMap)) {
     const dist = calculateDistance(speedMap[reindeer], seconds)
@@ -59,13 +59,13 @@ function buildDistanceMap(speedMap: SpeedMap, seconds: number): DistanceMap {
   return distanceMap
 }
 
-function calculateDistance(speed: ReindeerSpeed, seconds: number): number {
+function calculateDistance (speed: ReindeerSpeed, seconds: number): number {
   const totalTime = speed.goTime + speed.restTime
   return (Math.floor(seconds / totalTime) * speed.goTime * speed.kmPerSec +
     (Math.min(modulo(seconds, totalTime), speed.goTime) * speed.kmPerSec))
 }
 
-function buildSpeedMap(speeds: string[]): SpeedMap {
+function buildSpeedMap (speeds: string[]): SpeedMap {
   const speedMap: SpeedMap = {}
   for (const directive of speeds) {
     // Rudolph can fly 22 km/s for 8 seconds, but then must rest for 165 seconds.

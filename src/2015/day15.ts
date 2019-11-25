@@ -3,7 +3,7 @@
  */
 import { sum } from '../helpers/util'
 
-export function highestScoringRecipe(input: string[], calories: number = -1): number {
+export function highestScoringRecipe (input: string[], calories: number = -1): number {
   const baker = new Baker(input)
   const recipe = new Recipe()
   const ingredientList: Ingredient[] = Object.values(baker.ingredientMap)
@@ -21,8 +21,7 @@ function buildIngredientMap (cookbook: string[]): Cookbook {
     if (matches) {
       ingredientMap[name] = new Ingredient(name,
         +matches[0], +matches[1], +matches[2], +matches[3], +matches[4])
-    }
-    else throw new Error("No match: " + ingredient)
+    } else throw new Error('No match: ' + ingredient)
   }
 
   return ingredientMap
@@ -41,7 +40,7 @@ class Baker {
 
     if (ingredientList.length <= ingredientIndex) { // recipe has all ingredients
       if (recipe.sumTeaspoons() === 100) {           // recipe has =100 teaspoons
-        if (calorieRequirement <= 0 || recipe.caloricCount(this.ingredientMap) == calorieRequirement) {
+        if (calorieRequirement <= 0 || recipe.caloricCount(this.ingredientMap) === calorieRequirement) {
           const score = recipe.calculateScore(this.ingredientMap)
           if (score > this.highestScore) {
             this.highestScore = score

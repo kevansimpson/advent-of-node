@@ -22,7 +22,7 @@ export class ConwaysGame {
     return this.countLights()
   }
 
-  breakCornerLights() {
+  breakCornerLights () {
     const size = this.lightGrid.length
     this.lightGrid[1][1] = true
     this.lightGrid[1][size - 2] = true
@@ -55,7 +55,7 @@ export class ConwaysGame {
     return on
   }
 
-  countNeighbors(i: number, j: number) {
+  countNeighbors (i: number, j: number) {
     let on = 0
     if (this.lightGrid[i - 1][j - 1]) on += 1
     if (this.lightGrid[i][j - 1]) on += 1
@@ -71,7 +71,7 @@ export class ConwaysGame {
   displayGrid () {
     for (let i = 1; i <= this.lightGrid.length - 2; i++) {
       let line = ''
-      for (let j = 1; j <= this.lightGrid.length - 2; j++) line += (this.lightGrid[i][j]) ? "#" : "."
+      for (let j = 1; j <= this.lightGrid.length - 2; j++) line += (this.lightGrid[i][j]) ? '#' : '.'
       console.log(line)
     }
   }

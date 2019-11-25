@@ -2,7 +2,7 @@
  * @module 2015_day17
  */
 
-export function canPermutations(input: number[], target: number = 150): [number, number] {
+export function canPermutations (input: number[], target: number = 150): [number, number] {
   return new Canner(input).permutate(target)
 }
 
@@ -31,10 +31,9 @@ class Canner {
 
         const used: number = this.used(permutation)
         if (used < this.fewestCans) {
-            this.fewestCans = used
-            this.totalPermutationsWithFewest = 1
-        }
-        else if (used === this.fewestCans) {
+          this.fewestCans = used
+          this.totalPermutationsWithFewest = 1
+        } else if (used === this.fewestCans) {
           this.totalPermutationsWithFewest += 1
         }
       }
@@ -50,8 +49,8 @@ class Canner {
   }
 
   sum (permutation: boolean[]): number {
-    let sum = 0;
-    for (let i = 0; i < this.numberOfCans; i++) sum += (permutation[i]) ? this.cans[i] : 0;
+    let sum = 0
+    for (let i = 0; i < this.numberOfCans; i++) sum += (permutation[i]) ? this.cans[i] : 0
     return sum
   }
 
