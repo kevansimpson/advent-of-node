@@ -10,7 +10,7 @@ export function array2D<T> (size: number, value: T): T[][] {
   return Array.from(Array(size), _ => Array(size).fill((typeof value === 'function') ? value() : value))
 }
 
-export function debug (...messages: string[]): boolean {
+export function debug (...messages: any[]): boolean {
   const flag = process.argv.includes('--advent')
 
   if (flag && messages && messages.length > 0) messages.forEach(m => console.log(m))
@@ -41,8 +41,8 @@ export function modulo (numerator: number, denominator: number): number {
   return modulus
 }
 
-export function sum (intArray: number[]): number {
-  return intArray.reduce((a: number, b: number) => a + b)
+export function sum (intArray: number[], startingValue: number = 0): number {
+  return intArray.reduce((a: number, b: number) => a + b, startingValue)
 }
 
 /**
