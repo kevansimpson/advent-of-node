@@ -5,7 +5,7 @@ import { readNumbers } from '../../src/helpers/input'
 import { arrangePackages } from '../../src/2015/day24'
 import * as d24 from '../../src/2015/day24.doc'
 
-describe.only('2015 answers - Day 24', () => {
+describe('2015 answers - Day 24', () => {
   const input = readNumbers(path.join(__dirname, 'input24.txt'))
   it.skip('arrangePackages @ 3', async () => {
     assert.strictEqual(arrangePackages([...input], 3), d24.part1)
