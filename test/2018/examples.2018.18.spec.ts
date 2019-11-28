@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from 'assert'
 import 'mocha'
 import { debug } from '../../src/helpers/util'
 import { mapLumberArea, strangeMagic } from '../../src/2018/day18'
