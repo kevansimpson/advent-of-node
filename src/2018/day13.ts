@@ -1,7 +1,7 @@
 /**
  * @module 2018_day13
  */
-import { Direction, Point, key, toKey } from '../helpers/point'
+import { Arrow, Point, key, toKey } from '../helpers/point'
 import { debug, modulo } from '../helpers/util'
 
 export function firstCrash (rt: RaceTrack): Point {
@@ -71,7 +71,7 @@ function tick (car: Car, rt: RaceTrack): void {
   }
 }
 
-const turns: { [dir: string]: Direction }[] = [
+const turns: { [dir: string]: Arrow }[] = [
   { '^': '<', 'v': '>', '<': 'v', '>': '^' }, // + left
   { '^': '^', 'v': 'v', '<': '<', '>': '>' }, // + forward
   { '^': '>', 'v': '<', '<': '^', '>': 'v' }, // + right
@@ -131,12 +131,12 @@ function move (car: Car): Point {
 
 class Car {
   id: number
-  direction: Direction
+  direction: Arrow
   location: Point
   intersections: number
   path: Point[]
 
-  constructor (id: number, dir: Direction, loc: Point) {
+  constructor (id: number, dir: Arrow, loc: Point) {
     this.id = id
     this.direction = dir
     this.location = loc

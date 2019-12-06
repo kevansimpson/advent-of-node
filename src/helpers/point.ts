@@ -2,8 +2,9 @@
  * @module helpers
  */
 
+export type Arrow = '^' | 'v' | '<' | '>'
 export type Cardinal = 'N' | 'S' | 'W' | 'E'
-export type Direction = '^' | 'v' | '<' | '>'
+export type Direction = 'U' | 'D' | 'L' | 'R'
 export type Point = [ number, number ]
 
 export const ORIGIN: Point = [0, 0]
@@ -32,19 +33,23 @@ export function manhattanDistance (a: Point, b: Point): number {
   return Math.abs(b[0] - a[0]) + Math.abs(b[1] - a[1])
 }
 
-export function move (start: Point, dir: Cardinal | Direction): Point {
+export function move (start: Point, dir: Arrow | Cardinal | Direction): Point {
   switch (dir) {
     case '<':
     case 'W':
+    case 'L':
       return [ start[0] - 1, start[1] ]
     case '>':
     case 'E':
+    case 'R':
       return [ start[0] + 1, start[1] ]
     case '^':
     case 'N':
+    case 'U':
       return [ start[0], start[1] - 1 ]
     case 'v':
     case 'S':
+    case 'D':
       return [ start[0], start[1] + 1 ]
   }
 }

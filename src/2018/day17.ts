@@ -63,7 +63,7 @@ export class Reservoir {
     else this.drops.add(key)
     // this.display()
     drop: while (true) { // trickle down
-      const next = move(water, 'v')
+      const next = move(water, 'D')
       if (this.oob(next)) return
 
       switch (this.scanAt(next)) {
@@ -75,14 +75,14 @@ export class Reservoir {
           if (left && right && this.hasFloor(left, right)) {
             // console.log(`hasFloor => ${left} => ${right}`)
             this.fillFloor(left, right)
-            water = move(water, '^')
+            water = move(water, 'U')
             continue drop
           }
           // console.log(`h2O => ${water}`)
           // if (!this.isPassableAt(water) && this.scanAt(water) !== Square.WATER)
           this.markAt(water, Square.PATH)
-          this.flow(water, '<')
-          this.flow(water, '>')
+          this.flow(water, 'L')
+          this.flow(water, 'R')
           break drop
         case Square.SAND:
         case Square.PATH:
@@ -113,7 +113,7 @@ export class Reservoir {
     while (true) {
       if (this.oob(flow)) return
 
-      const below = move(flow, 'v')
+      const below = move(flow, 'D')
       if (!this.isPassableAt(flow)) break
 
       this.markAt(flow, Square.PATH)
