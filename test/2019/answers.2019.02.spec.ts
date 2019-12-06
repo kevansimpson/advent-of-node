@@ -5,7 +5,7 @@ import { readString } from '../../src/helpers/input'
 import { runProgram, targetProgram } from '../../src/2019/day02'
 import * as d02 from '../../src/2019/day02.doc'
 
-describe.only('2019 solutions - Day 02', () => {
+describe('2019 solutions - Day 02', () => {
   const input = readString(path.join(__dirname, 'input02.txt')).split(',').map(Number)
   // before running the program, replace position 1 with the value 12 and replace position 2 with the value 2
   const copy = [...input]

@@ -2,7 +2,7 @@ import assert from 'assert'
 import 'mocha'
 import { runProgram } from '../../src/2019/day02'
 
-describe.only('2019 examples - Day 02', () => {
+describe('2019 examples - Day 02', () => {
   it('should run program', () => {
     assert.deepStrictEqual(runProgram([1,0,0,0,99]), [2,0,0,0,99])
     assert.deepStrictEqual(runProgram([2,3,0,3,99]), [2,3,0,6,99])
