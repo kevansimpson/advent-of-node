@@ -2,19 +2,19 @@
  * @module 2019_day02
  */
 
-type Op = (codes: number[], a: number, b: number, c: number) => void
-
-export const operations: { [ opCode: number ]: Op } = {
-  1: _add,
-  2: _mult
-}
-
 export function runProgram (input: number[]): number[] {
   const codes = [...input]
   for (let x = 0; x < codes.length; x += 4) {
     const opCode = codes[x]
-    if (opCode === 99) return codes
-    else operations[opCode](codes, codes[x + 1], codes[x + 2], codes[x + 3])
+    switch (opCode) {
+      case 99: return codes
+      case 1:
+        codes[codes[x + 3]] = codes[codes[x + 1]] + codes[codes[x + 2]]
+        break
+      case 2:
+        codes[codes[x + 3]] = codes[codes[x + 1]] * codes[codes[x + 2]]
+        break
+    }
   }
 
   throw new Error('Unknown Operation')
@@ -31,12 +31,4 @@ export function targetProgram (input: number[], target: number): number {
   }
 
   return -1
-}
-
-function _add (codes: number[], a: number, b: number, c: number): void {
-  codes[c] = codes[a] + codes[b]
-}
-
-function _mult (codes: number[], a: number, b: number, c: number): void {
-  codes[c] = codes[a] * codes[b]
 }
