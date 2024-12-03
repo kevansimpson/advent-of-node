@@ -19,6 +19,7 @@
     "year:2015": "npm run examples:2015 && npm run answers:2015",
     "year:2018": "npm run examples:2018 && npm run answers:2018",
     "year:2019": "npm run examples:2019 && npm run answers:2019",
+    "year:2024": "npm run answers:2024",
     "start": "node --max_old_space_size=8192 dist/start.js",
     "local:advent": "nodemon --inspect --max_old_space_size=8192 dist/start.js",
     "local": "run-p local:*",
