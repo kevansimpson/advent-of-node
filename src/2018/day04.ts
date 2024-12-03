@@ -11,7 +11,7 @@ export type Guard = {
 
 export function findSleepiestGuard (records: Map<number, Guard>): Guard {
   const guards = records.values()
-  const first = guards.next().value
+  const first: Guard = guards.next().value as Guard
   let sleepiest: [number, Guard] = [getTimeAsleep(first), first]
   for (let g of guards) {
     const asleep = getTimeAsleep(g)

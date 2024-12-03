@@ -38,7 +38,7 @@ export function lastCar (rt: RaceTrack): Point {
       } else debug(`Ghost Car${car.id}`)
     }
 
-    if (cars.size <= 1) return cars.values().next().value.location
+    if (cars.size <= 1) return cars.values().next().value!.location
   }
 }
 
