@@ -54,6 +54,10 @@ export function move (start: Point, dir: Arrow | Cardinal | Direction): Point {
   }
 }
 
+export function moveXY(pt: Point, dx: number, dy: number): Point {
+  return [pt[0] + dx, pt[1] + dy]
+}
+
 export function samePoint (a: Point, b: Point): boolean {
   return a[0] === b[0] && a[1] === b[1]
 }
@@ -65,5 +69,8 @@ export function surrounding (pt: Point): Point[] {
     [x - 1, y], [x + 1, y],
     [x - 1, y + 1], [x, y + 1], [x + 1, y + 1]
   ]
+}
 
+export function inGrid(pt: Point, width: number, height: number): boolean {
+  return pt[0] >= 0 && pt[0] < width && pt[1] >= 0 && pt[1] < height
 }
