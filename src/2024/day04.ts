@@ -1,5 +1,5 @@
 /**
- * @module 2024_day03
+ * @module 2024_day04
  */
 
 import { inGrid, moveXY, toKey, Point } from "../helpers/point"
