@@ -7,7 +7,6 @@ import * as d06 from '../../src/2024/day06.doc'
 
 describe('2024 answers - Day 06', () => {
   const input = readLines(path.join(__dirname, '../resources/2024/input06.txt'))
-  console.log('running day06')
   const result = solve(input)
   
   it('unique steps', async () => assert.strictEqual(result.unique, d06.part1))

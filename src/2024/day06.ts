@@ -11,9 +11,7 @@ export type GuardSteps = {
 
 export function solve (input: string[]): GuardSteps {
   const lab = createLab(input)
-  // console.log(`lab = ${lab.obstacles.size}`) // same obstacles
   const path = lab.followGuard()
-  // console.log(`path = ${path}`)
 
   return ({ unique: path.path.size, loops: lab.findLoops(path.path) })
 }
@@ -35,7 +33,6 @@ function createLab(input: string[]): Lab {
     }
   }
 
-  console.log(`guard = ${guard}`)
   return new Lab(size, obstacles, guard, direction)
 }
 
@@ -73,10 +70,8 @@ class Lab {
     while (this.inLab(pos)) {
       path.add(toKey(pos))
       let next = move(pos, DIR[dir] as Arrow)
-      // console.log(`next = ${next}`)
       while (this.obstacles.has(toKey(next))) {
         const e = `${toKey(next)}-${dir}`
-        // console.log(`encounter = ${e}`)
         if (encounters.has(e))
           return ({ path: path, isLoop: true})
         else
@@ -85,7 +80,6 @@ class Lab {
         next = move(pos, DIR[dir] as Arrow)
       }
       pos = next
-      // console.log(`${toKey(pos)} - ${dir}`)
     }
 
     return ({ path: path, isLoop: false})
