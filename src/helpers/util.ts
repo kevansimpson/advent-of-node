@@ -74,4 +74,26 @@ export function buildAllPaths<T> (available: T[], permutation: T[], noneAvailabl
   }
 }
 
+export function combinations<T>(data: T[], len: number): T[][] {
+  const allCombos: T[][] = []
+  comboUtil(data, allCombos, [], 0, len)
+  return allCombos
+}
+
+function comboUtil<T>(data: T[], allCombos: T[][], combo: T[], index: number, missing: number) {
+  if (missing === 0)
+    allCombos.push(combo)
+  else {
+    for (let i = index; i <= data.length - missing; i++) {
+      let newCombo: T[]
+      if (i == data.length - missing)
+        newCombo = combo
+      else
+        newCombo = [...combo]
+      newCombo.push(data[i])
+      comboUtil(data, allCombos, newCombo, i + 1, missing - 1)
+    }
+  }
+}
+
 type Consumer<T> = (input: T) => void
