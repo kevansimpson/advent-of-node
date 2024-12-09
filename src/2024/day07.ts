@@ -20,10 +20,10 @@ export function solve (input: string[]): RopeBridge {
     const values = Array.from(equation.matchAll(/(\d+)/g)).map(n => Number(n[0]))
     if (canBeCalibrated(values, ADD_MULTIPLY))
       calibration += values[0]
-    if (canBeCalibrated(values, WITH_CONCAT))
+    else if (canBeCalibrated(values, WITH_CONCAT))
       concatenation += values[0]
   })
-
+  concatenation += calibration
   return ({ calibration: calibration, concatenation: concatenation })
 }
 
