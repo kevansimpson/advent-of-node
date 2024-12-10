@@ -62,6 +62,15 @@ export function samePoint (a: Point, b: Point): boolean {
   return a[0] === b[0] && a[1] === b[1]
 }
 
+export function cardinal(pt: Point): Point[] {
+  const [x, y] = pt
+  return [
+    [x, y - 1],
+    [x - 1, y], [x + 1, y],
+    [x, y + 1]
+  ]
+}
+
 export function surrounding (pt: Point): Point[] {
   const [x, y] = pt
   return [
