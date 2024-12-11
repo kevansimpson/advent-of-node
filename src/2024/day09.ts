@@ -11,33 +11,46 @@ type Block = {
   id: number,
   length: number
 }
-
-export function solve (input: string): Checksums {
-  const disk1: number[] = []
-  const disk2: Block[] = []
+export async function solve (input: string): Promise<number> {
+  const disk: number[] = []
   let fileId = 0
   let freeSpace = false
   input.split('').forEach(ch => {
     const val = Number(ch)
     for (let i = 0; i < val; i++) {
       if (freeSpace)
-        disk1.push(-1)
+        disk.push(-1)
       else
-        disk1.push(fileId)
+        disk.push(fileId)
     }
-    if (freeSpace) {
-      disk2.push({ id: -1, length: val })
+    if (freeSpace)
       fileId++
-    }
-    else
-      disk2.push({ id: fileId, length: val })
     freeSpace = !freeSpace
   })
 
-  defragDisk(disk1)
-  defragBlocks(disk2)
+  defragDisk(disk)
 
-  return ({ checksum1: checksum(disk1), checksum2: checksumBlocks(disk2) })
+  return checksum(disk)
+}
+
+export async function solveBlocks (input: string): Promise<number> {
+  const disk: Block[] = []
+  let fileId = 0
+  let freeSpace = false
+  input.split('').forEach(ch => {
+    const val = Number(ch)
+    if (freeSpace) {
+      disk.push({ id: -1, length: val })
+      fileId++
+    }
+    else
+      disk.push({ id: fileId, length: val })
+    freeSpace = !freeSpace
+  })
+
+  defragBlocks(disk)
+
+  return checksumBlocks(disk)
 }
 
 function defragDisk(disk: number[]) {
