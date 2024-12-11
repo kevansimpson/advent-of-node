@@ -9,7 +9,7 @@ describe('2024 answers - Day 10', () => {
   const input = readLines(path.join(__dirname, '../resources/2024/input10.txt'))
   it('ascend trails', async () => {
     const result = await solve(input)
-    it('trail scores', async () => assert.strictEqual(result.sum, d10.part1))
-    it('trail ratings', async () => assert.strictEqual(result.rating, d10.part2))  
+    assert.strictEqual(result.sum, d10.part1)
+    assert.strictEqual(result.rating, d10.part2)
   })
 })

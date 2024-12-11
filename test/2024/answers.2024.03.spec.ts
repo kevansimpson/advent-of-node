@@ -9,7 +9,7 @@ describe('2024 answers - Day 03', () => {
   const input = readString(path.join(__dirname, '../resources/2024/input03.txt'))
   it ('multiply corrupted', async () => {
     const result = solve(input)
-    it('all mul', async () => assert.strictEqual(result.all, d03.part1))
-    it('enabled mul', async () => assert.strictEqual(result.enabled, d03.part2))
+    assert.strictEqual(result.all, d03.part1)
+    assert.strictEqual(result.enabled, d03.part2)
   })
 })

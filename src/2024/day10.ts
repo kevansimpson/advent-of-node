@@ -9,9 +9,9 @@ export type Trailheads = {
     rating: number
 }
 
-export async function solve (input: string[]): Promise<Trailheads> {
+export function solve (input: string[]): Trailheads {
   const size = input.length
-  const trails: Promise<Trailheads>[] = []
+  const trails: Trailheads[] = []
   let sum = 0
   let rating = 0
   for (let r = size - 1; r >= 0; r--) {
@@ -20,8 +20,7 @@ export async function solve (input: string[]): Promise<Trailheads> {
         trails.push(ascendTrail([c, size - r - 1], input, size))
     }
   }
-  trails.forEach(async trail => {
-    const t = await trail
+  trails.forEach(t => {
     sum += t.sum
     rating += t.rating
   })
@@ -29,7 +28,7 @@ export async function solve (input: string[]): Promise<Trailheads> {
   return ({ sum: sum, rating: rating })
 }
 
-async function ascendTrail(head: Point, allTrails: string[], size: number): Promise<Trailheads> {
+function ascendTrail(head: Point, allTrails: string[], size: number): Trailheads {
   let height = 0
   let steps = [head]
   while (steps.length > 0 && height < 9) {

@@ -9,7 +9,7 @@ describe('2024 answers - Day 05', () => {
   const input = readLines(path.join(__dirname, '../resources/2024/input05.txt'))
   it('page ordering', async () => {
     const result = solve(input)
-    it('middle sum', async () => assert.strictEqual(result.middleSum, d05.part1))
-    it('corrected sum', async () => assert.strictEqual(result.corrected, d05.part2))  
+    assert.strictEqual(result.middleSum, d05.part1)
+    assert.strictEqual(result.corrected, d05.part2)
   })
 })

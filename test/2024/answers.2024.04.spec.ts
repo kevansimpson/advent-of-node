@@ -9,7 +9,7 @@ describe('2024 answers - Day 04', () => {
   const input = readLines(path.join(__dirname, '../resources/2024/input04.txt'))
   it ('xmas word search', async () => {
     const result = solve(input)
-    it('xmas count', async () => assert.strictEqual(result.xmas, d04.part1))
-    it('mas crosses', async () => assert.strictEqual(result.masCross, d04.part2))
+    assert.strictEqual(result.xmas, d04.part1)
+    assert.strictEqual(result.masCross, d04.part2)
   })
 })
