@@ -4,7 +4,7 @@ import { Point, toKey } from "./point";
  * <a href="https://howtodoinjava.com/typescript/sets/">Reference</a>
  */
 class SetWithContentEquality<T> {
-    private items: T[] = [];
+    private items: Map<string, T> = new Map();
     private getKey: (item: T) => string;
     public size: number
 
@@ -15,37 +15,35 @@ class SetWithContentEquality<T> {
 
     add(item: T): void {
         const key = this.getKey(item);
-        if (!this.items.some(existing => this.getKey(existing) === key)) {
-            this.items.push(item);
+        if (!this.items.has(key)) {
+            this.items.set(key, item);
             this.size++
         }
     }
 
     has(item: T): boolean {
-        return this.items.some(existing => this.getKey(existing) === this.getKey(item));
+        return this.items.has(this.getKey(item));
     }
 
     values(): T[] {
-        return [...this.items];
+        return [...this.items.values()];
     }
 
     delete(item: T): boolean {
-        const index = this.items.findIndex((element) => this.getKey(item) === this.getKey(element))
-        if (index >= 0) {
-            this.items.splice(index, 1)
-            this.size--
-            return true
-        }
-        return false
+        return this.items.delete(this.getKey(item))
     }
 
     clear() {
-        this.items.length = 0
+        this.items.clear()
         this.size = 0
     }
 
-    forEach(fxn: (element: T, index: number, array: T[]) => void) {
-        this.items.forEach((e, i, a) => fxn(e, i, a))
+    forEach(fxn: (value: T, key: string, map: Map<string, T>) => void) {
+        this.items.forEach((v, k, m) => fxn(v, k, m))
+    }
+
+    public toString = () : string => {
+        return `[${Array.from(this.items.keys()).toString()}]`
     }
 }
 

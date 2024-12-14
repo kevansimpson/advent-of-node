@@ -77,5 +77,13 @@ describe('PointSet unit tests', () => {
         assert.strictEqual(x, 6)
         assert.strictEqual(y, -6)
     })
+
+    it('toString', async () => {
+        const set = new PointSet()
+        set.add([1, 1])
+        set.add([2, 2])
+        set.add([3, 3])
+        assert.strictEqual(set.toString(), '[[1,1],[2,2],[3,3]]')
+    })
 })
   
