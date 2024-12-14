@@ -97,3 +97,7 @@ function comboUtil<T>(data: T[], allCombos: T[][], combo: T[], index: number, mi
 }
 
 type Consumer<T> = (input: T) => void
+
+export function extractNumbers(str: string): number[] {
+  return Array.from(str.matchAll(/(\d+)/g)).map(n => Number(n[0]))
+}

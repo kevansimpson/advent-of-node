@@ -2,6 +2,8 @@
  * @module 2024_day07
  */
 
+import { extractNumbers } from '../helpers/util'
+
 export type RopeBridge = {
   calibration: number,
   concatenation: number
@@ -17,7 +19,7 @@ export function solve (input: string[]): RopeBridge {
   let calibration = 0
   let concatenation = 0
   input.forEach( equation => {
-    const values = Array.from(equation.matchAll(/(\d+)/g)).map(n => Number(n[0]))
+    const values = extractNumbers(equation)
     if (canBeCalibrated(values, ADD_MULTIPLY))
       calibration += values[0]
     else if (canBeCalibrated(values, WITH_CONCAT))
