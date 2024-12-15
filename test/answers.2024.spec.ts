@@ -66,7 +66,7 @@ describe('2024 answers', () => {
     assert.strictEqual(result.harmonics, 1233)
   })
 
-  it('Day09: checksum', async () => {
+  describe('Day09: checksum', async () => {
     const input = readString(path.join(__dirname, './resources/2024/input09.txt'))
     it('checksum 1', async () => assert.strictEqual(await day09a(input), 6334655979668))
     it('checksum 2', async () => assert.strictEqual(await day09b(input), 6349492251099))
