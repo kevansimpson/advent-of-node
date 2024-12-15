@@ -15,6 +15,7 @@ import { solve as day10 } from '../src/2024/day10'
 import { solve as day11 } from '../src/2024/day11'
 import { solve as day12 } from '../src/2024/day12'
 import { solve as day13 } from '../src/2024/day13'
+import { solve as day14 } from '../src/2024/day14'
 
 describe('2024 answers', () => {
   it('Day01: list distances', async () => {
@@ -93,5 +94,11 @@ describe('2024 answers', () => {
     const result = day13(readLines(path.join(__dirname, './resources/2024/input13.txt')))
     assert.strictEqual(result.near, 33209)
     assert.strictEqual(result.far, 83102355665474)
+  })
+
+  it('Day14: robot guards', async () => {
+    const result = day14(readLines(path.join(__dirname, './resources/2024/input14.txt')), 101, 103)
+    assert.strictEqual(result.safetyFactor, 208437768)
+    assert.strictEqual(result.tree, 7492)
   })
 })

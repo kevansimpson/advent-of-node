@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "ES2021",
     "outDir": "dist",
     "rootDir": "src",
     "moduleResolution": "node",
@@ -22,7 +22,7 @@
     "listFiles": false,
     "pretty": true,
 
-    "lib": ["es2017"],
+    "lib": ["ES2021"],
     "types": ["node"],
     "typeRoots": ["node_modules/@types", "src/types"]
   },
