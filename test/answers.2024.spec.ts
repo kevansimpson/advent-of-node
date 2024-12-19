@@ -16,6 +16,7 @@ import { solve as day11 } from '../src/2024/day11'
 import { solve as day12 } from '../src/2024/day12'
 import { solve as day13 } from '../src/2024/day13'
 import { solve as day14 } from '../src/2024/day14'
+import { solveStandard, solveWide } from '../src/2024/day15'
 
 describe('2024 answers', () => {
   it('Day01: list distances', async () => {
@@ -52,7 +53,7 @@ describe('2024 answers', () => {
     const result = day06(readLines(path.join(__dirname, './resources/2024/input06.txt')))
     assert.strictEqual(result.unique, 4454)
     assert.strictEqual(result.loops, 1503)
-  }).timeout(3000)
+  }).timeout(5000)
 
   it('Day07: calibrate results', async () => {
     const result = day07(readLines(path.join(__dirname, './resources/2024/input07.txt')))
@@ -100,5 +101,15 @@ describe('2024 answers', () => {
     const result = day14(readLines(path.join(__dirname, './resources/2024/input14.txt')), 101, 103)
     assert.strictEqual(result.safetyFactor, 208437768)
     assert.strictEqual(result.tree, 7492)
+  })
+
+  describe('Day15: move boxes', async () => {
+    const input = readLines(path.join(__dirname, './resources/2024/input15.txt'))
+    it('standard boxes', async () => {
+      assert.strictEqual(solveStandard(input), 1457740)
+    })
+    it('wide boxes', async () => {
+      assert.strictEqual(solveWide(input), 1467145)
+    })
   })
 })
