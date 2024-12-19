@@ -3,7 +3,7 @@ import { Point, toKey } from "./point";
 /**
  * <a href="https://howtodoinjava.com/typescript/sets/">Reference</a>
  */
-class SetWithContentEquality<T> {
+export class SetWithContentEquality<T> {
     private items: Map<string, T> = new Map();
     private getKey: (item: T) => string;
     public size: number

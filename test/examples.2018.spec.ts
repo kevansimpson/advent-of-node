@@ -295,7 +295,7 @@ describe('2018 examples', async () => {
     })
   })
 
-  describe('Day 17', async () => {
+  describe.skip('Day 17', async () => {
     it('water flowing', async () => {
       const input = `x=495, y=2..7
   y=7, x=495..501

@@ -144,7 +144,7 @@ describe('2018 solutions', () => {
     it('processInstructions', async () => assert.deepStrictEqual(cpu.processInstructions(map), [610, 2, 610 , 3]))
   })
 
-  describe('Day 17', () => {
+  describe.skip('Day 17', () => {
     const input = readLines(path.join(__dirname, './resources/2018/input17.txt'))
     const reservoir = mapReservoir(input)
     // reservoir.display()

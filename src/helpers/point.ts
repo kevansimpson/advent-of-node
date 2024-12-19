@@ -46,11 +46,11 @@ export function move (start: Point, dir: Arrow | Cardinal | Direction): Point {
     case '^':
     case 'N':
     case 'U':
-      return [ start[0], start[1] - 1 ]
+      return [ start[0], start[1] + 1 ]
     case 'v':
     case 'S':
     case 'D':
-      return [ start[0], start[1] + 1 ]
+      return [ start[0], start[1] - 1 ]
   }
 }
 
