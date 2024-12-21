@@ -17,6 +17,7 @@ import { solve as day12 } from '../src/2024/day12'
 import { solve as day13 } from '../src/2024/day13'
 import { solve as day14 } from '../src/2024/day14'
 import { solveStandard, solveWide } from '../src/2024/day15'
+import { solve as day16 } from '../src/2024/day16'
 
 describe('2024 answers', () => {
   it('Day01: list distances', async () => {
@@ -111,5 +112,11 @@ describe('2024 answers', () => {
     it('wide boxes', async () => {
       assert.strictEqual(solveWide(input), 1467145)
     })
+  })
+
+  it('Day16: reindeer maze', async () => {
+    const result = day16(readLines(path.join(__dirname, './resources/2024/input16.txt')))
+    assert.strictEqual(result.steps, 85432)
+    assert.strictEqual(result.seats, 465)
   })
 })
