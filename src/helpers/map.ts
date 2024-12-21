@@ -2,7 +2,7 @@ import { Point, toKey } from "./point";
 
 type Entry<K, V> = [K, V]
 
-class MapWithKeyEquality<K, V> {
+export class MapWithKeyEquality<K, V> {
     private map: Map<string, Entry<K, V>> = new Map();
     private getKey: (item: K) => string;
     public size: number
@@ -12,42 +12,42 @@ class MapWithKeyEquality<K, V> {
         this.size = 0
     }
 
-    get(key: K): V | undefined {
+    public get(key: K): V | undefined {
         return this.has(key) ? this.map.get(this.getKey(key))![1] : undefined
     }
 
-    set(key: K, value: V): void {
+    public set(key: K, value: V): void {
         const str = this.getKey(key);
         this.map.set(str, [key, value]);
         this.size = this.map.size
     }
 
-    has(key: K): boolean {
+    public has(key: K): boolean {
         return this.map.has(this.getKey(key));
     }
 
-    entries(): [K, V][] {
+    public entries(): [K, V][] {
         return [...this.map.values()];
     }
 
-    keys(): K[] {
+    public keys(): K[] {
         return [...this.map.values()].map(e => e[0]);
     }
 
-    values(): V[] {
+    public values(): V[] {
         return [...this.map.values()].map(e => e[1]);
     }
 
-    delete(key: K): boolean {
+    public delete(key: K): boolean {
         return this.map.delete(this.getKey(key))
     }
 
-    clear() {
+    public clear() {
         this.map.clear()
         this.size = 0
     }
 
-    forEach(fxn: (value: V, key: K, map: Map<string, Entry<K, V>>) => void) {
+    public forEach(fxn: (value: V, key: K, map: Map<string, Entry<K, V>>) => void) {
         this.map.forEach((v, _, m) => fxn(v[1], v[0], m))
     }
 
