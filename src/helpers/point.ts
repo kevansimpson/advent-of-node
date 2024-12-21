@@ -9,6 +9,43 @@ export type Point = [ number, number ]
 
 export const ORIGIN: Point = [0, 0]
 
+const ARROWS = ['^', '>', 'v', '<']
+const CARDINAL = ['N', 'E', 'S', 'W']
+const DIRECTION = ['U', 'R', 'D', 'L']
+
+export function turnLeft<T extends Arrow | Cardinal | Direction>(facing: T): T {
+  return turn(facing, 3)
+}
+
+export function turnRight<T extends Arrow | Cardinal | Direction>(facing: T): T {
+  return turn(facing, 1)
+}
+
+function turn<T extends Arrow | Cardinal | Direction>(facing: T, turns: number): T {
+  let array: T[] = []
+  switch (facing) {
+    case '^':
+    case 'v':
+    case '<':
+    case '>': 
+      array = ARROWS as T[]
+      break
+    case 'N':
+    case 'S':
+    case 'E':
+    case 'W':
+      array = CARDINAL as T[]
+      break
+    case 'U':
+    case 'D':
+    case 'L':
+    case 'R': 
+      array = DIRECTION as T[]
+      break
+    }
+  return array[(array.indexOf(facing) + turns) % 4] as T
+}
+
 export function key (x: number, y: number): string {
   return `[${x},${y}]`
 }
