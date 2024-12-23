@@ -20,6 +20,7 @@ import { solveStandard, solveWide } from '../src/2024/day15'
 import { solve as day16 } from '../src/2024/day16'
 import { runProgram, lowestRegisterA } from '../src/2024/day17'
 import { solve as day18 } from '../src/2024/day18'
+import { solve as day19 } from '../src/2024/day19'
 
 describe('2024 answers', () => {
   it('Day01: list distances', async () => {
@@ -136,5 +137,11 @@ describe('2024 answers', () => {
     const result = day18(readLines(path.join(__dirname, './resources/2024/input18.txt')))
     assert.strictEqual(result.minSteps, 454)
     assert.strictEqual(result.firstBlocker, '8,51')
+  }).timeout(5000)
+
+  it('Day19: towel designs', async () => {
+    const result = day19(readLines(path.join(__dirname, './resources/2024/input19.txt')))
+    assert.strictEqual(result.possible, 251)
+    assert.strictEqual(result.totalCombos, 616957151871345)
   }).timeout(5000)
 })
