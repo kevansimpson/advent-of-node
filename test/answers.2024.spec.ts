@@ -18,6 +18,7 @@ import { solve as day13 } from '../src/2024/day13'
 import { solve as day14 } from '../src/2024/day14'
 import { solveStandard, solveWide } from '../src/2024/day15'
 import { solve as day16 } from '../src/2024/day16'
+import { runProgram, lowestRegisterA } from '../src/2024/day17'
 
 describe('2024 answers', () => {
   it('Day01: list distances', async () => {
@@ -118,5 +119,15 @@ describe('2024 answers', () => {
     const result = day16(readLines(path.join(__dirname, './resources/2024/input16.txt')))
     assert.strictEqual(result.steps, 85432)
     assert.strictEqual(result.seats, 465)
+  })
+
+  describe.only('Day17: Historian computer', async () => {
+    const input = readLines(path.join(__dirname, './resources/2024/input17.txt'))
+    it('program output', async () => {
+      assert.strictEqual(runProgram(input), '3,5,0,1,5,1,5,1,0')
+    })
+    it('lowest register A', async () => {
+      assert.strictEqual(lowestRegisterA(input), 107413700225434n)
+    })
   })
 })
