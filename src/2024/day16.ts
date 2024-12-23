@@ -85,15 +85,6 @@ function placesToSit(solutions: Node<DirPoint>[]): number {
   return seats.size
 }
 
-// function getSeats(node?: Node<DirPoint>): PointSet {
-//   const seats = new PointSet()
-//   while (node) {
-//     seats.add(node.data!.pos)
-//     node = node.parent
-//   }
-//   return seats
-// }
-
 class DirPoint {
   public dir: Arrow = '>'
   public pos: Point = [0,0]
