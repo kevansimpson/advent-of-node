@@ -19,6 +19,7 @@ import { solve as day14 } from '../src/2024/day14'
 import { solveStandard, solveWide } from '../src/2024/day15'
 import { solve as day16 } from '../src/2024/day16'
 import { runProgram, lowestRegisterA } from '../src/2024/day17'
+import { solve as day18 } from '../src/2024/day18'
 
 describe('2024 answers', () => {
   it('Day01: list distances', async () => {
@@ -121,7 +122,7 @@ describe('2024 answers', () => {
     assert.strictEqual(result.seats, 465)
   })
 
-  describe.only('Day17: Historian computer', async () => {
+  describe('Day17: Historian computer', async () => {
     const input = readLines(path.join(__dirname, './resources/2024/input17.txt'))
     it('program output', async () => {
       assert.strictEqual(runProgram(input), '3,5,0,1,5,1,5,1,0')
@@ -130,4 +131,10 @@ describe('2024 answers', () => {
       assert.strictEqual(lowestRegisterA(input), 107413700225434n)
     })
   })
+
+  it('Day18: corrupted memory', async () => {
+    const result = day18(readLines(path.join(__dirname, './resources/2024/input18.txt')))
+    assert.strictEqual(result.minSteps, 454)
+    assert.strictEqual(result.firstBlocker, '8,51')
+  }).timeout(5000)
 })
