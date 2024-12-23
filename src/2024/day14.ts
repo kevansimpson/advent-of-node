@@ -11,14 +11,14 @@ export type RobotGuards = {
   tree: number
 }
 
-export function solve(input: string[], width: number, height: number): RobotGuards {
+export function solve(input: string[], width: number, height: number, debug?: boolean): RobotGuards {
   const bots = findRobots(input)
   bots.forEach(bot => bot.move(100, width, height))
 
-  return ({ safetyFactor: safetyFactor(bots, width, height), tree: findTree(bots, width, height) })
+  return ({ safetyFactor: safetyFactor(bots, width, height), tree: findTree(bots, width, height, debug) })
 }
 
-function findTree(bots: Robot[], width: number, height: number): number {
+function findTree(bots: Robot[], width: number, height: number, debug?: boolean): number {
   // start after the first 100 seconds + 0-index offset
   for (let s = 101; s < 100000; s++) {
     const image = new PointSet()
@@ -33,7 +33,8 @@ function findTree(bots: Robot[], width: number, height: number): number {
     })
 
     if (image.size === bots.length) {
-      printTree(finalPositions)
+      if (debug)
+        printTree(finalPositions)
       return s
     }
   }
