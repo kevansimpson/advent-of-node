@@ -21,6 +21,7 @@ import { solve as day16 } from '../src/2024/day16'
 import { runProgram, lowestRegisterA } from '../src/2024/day17'
 import { solve as day18 } from '../src/2024/day18'
 import { solve as day19 } from '../src/2024/day19'
+import { solve as day20 } from '../src/2024/day20'
 
 describe('2024 answers', () => {
   it('Day01: list distances', async () => {
@@ -127,5 +128,10 @@ describe('2024 answers', () => {
   it('Day19: towel designs', async () => {
     const result = day19(readLines(path.join(__dirname, './resources/2024/input19.txt')))
     assert.deepStrictEqual(result, [251, 616957151871345])
-  }).timeout(5000)
+  })
+
+  it('Day20: race condition', async () => {
+    const result = day20(readLines(path.join(__dirname, './resources/2024/input20.txt')))
+    assert.deepStrictEqual(result, [1454, 997879])
+  })
 })
