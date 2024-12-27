@@ -5,12 +5,7 @@
 import { inGrid, moveXY, Point, toKey } from "../helpers/point"
 import { combinations } from "../helpers/util"
 
-export type Antinodes = {
-    count: number,
-    harmonics: number
-}
-
-export function solve (input: string[]): Antinodes {
+export function solve (input: string[]): [number, number] {
   const size = input.length
   const scan: Map<string, Point[]> = scanAntennas(input)
   const nodes = new Set<string>
@@ -44,7 +39,7 @@ export function solve (input: string[]): Antinodes {
     })
   })
     
-  return ({ count: nodes.size, harmonics: harmonics.size })
+  return [nodes.size, harmonics.size]
 }
 
 function scanAntennas(input: string[]): Map<string, Point[]> {

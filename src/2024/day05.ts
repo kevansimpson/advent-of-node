@@ -2,12 +2,7 @@
  * @module 2024_day05
  */
 
-export type SafetyManual = {
-  middleSum: number,
-  corrected: number
-}
-
-export function solve (input: string[]): SafetyManual {
+export function solve (input: string[]): [number, number] {
   let middleSum = 0
   let corrected = 0
   const rulesUpdates = new RulesUpdates(input)
@@ -18,7 +13,7 @@ export function solve (input: string[]): SafetyManual {
       corrected += reorderUpdate(update, rulesUpdates)
   })
 
-  return ({ middleSum: middleSum, corrected: corrected })
+  return [middleSum, corrected]
 }
 
 function inOrder(update: number[], rules: RulesUpdates): boolean {

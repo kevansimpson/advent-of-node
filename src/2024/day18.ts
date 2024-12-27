@@ -6,13 +6,9 @@ import { PointMap } from "../helpers/map"
 import { Node, createRootNode } from "../helpers/node"
 import { Point, cardinal, inGrid, samePoint } from "../helpers/point"
 
-export type PathSteps = {
-  minSteps: number,
-  firstBlocker: string
-}
 const SIZE = 71
 
-export function solve(input: string[]): PathSteps {
+export function solve(input: string[]): [number, string] {
   const unsafe: Point[] = []
   input.forEach(coord => {
     const arr = coord.split(',')
@@ -27,7 +23,7 @@ export function solve(input: string[]): PathSteps {
     memory[firstBlocker[1]][firstBlocker[0]] = true
   } while (findPath(memory) > 0)
 
-    return { minSteps: part1, firstBlocker: `${firstBlocker[1]},${firstBlocker[0]}` }
+    return [part1, `${firstBlocker[1]},${firstBlocker[0]}`]
 }
 
 function findPath(memory: boolean[][]): number {

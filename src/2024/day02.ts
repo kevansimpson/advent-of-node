@@ -2,12 +2,7 @@
  * @module 2024_day02
  */
 
-export type SafeLevels = {
-    safe: number,
-    singleBad: number
-}
-
-export function solve(input: string[]): SafeLevels {
+export function solve(input: string[]): [number, number] {
   let safe = 0
   let singleBad = 0
   input.forEach(line => {
@@ -18,7 +13,7 @@ export function solve(input: string[]): SafeLevels {
       singleBad++
   })
 
-  return ({ safe: safe, singleBad: singleBad })
+  return [safe, singleBad]
 }
 
 function isSafe(levels: number[]): boolean {

@@ -4,12 +4,12 @@
 
 import { cardinal, toKey, Point, inGrid } from "../helpers/point"
 
-export type Trailheads = {
+type Trailheads = {
     sum: number,
     rating: number
 }
 
-export function solve (input: string[]): Trailheads {
+export function solve (input: string[]): [number, number] {
   const size = input.length
   const trails: Trailheads[] = []
   let sum = 0
@@ -25,7 +25,7 @@ export function solve (input: string[]): Trailheads {
     rating += t.rating
   })
 
-  return ({ sum: sum, rating: rating })
+  return [sum, rating]
 }
 
 function ascendTrail(head: Point, allTrails: string[], size: number): Trailheads {

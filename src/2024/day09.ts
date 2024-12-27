@@ -2,15 +2,11 @@
  * @module 2024_day09
  */
 
-export type Checksums = {
-  checksum1: number,
-  checksum2: number
-}
-
 type Block = {
   id: number,
   length: number
 }
+
 export async function solve (input: string): Promise<number> {
   const disk: number[] = []
   let fileId = 0

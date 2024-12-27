@@ -2,15 +2,10 @@
  * @module 2024_day03
  */
 
-export type MulProducts = {
-    all: number,
-    enabled: number
-}
-
 const MUL_REGEX = /mul\((\d+),(\d+)\)/g
 const DO_OR_DO_NOT_REGEX = /do\(\)|don't\(\)/g
 
-export function solve (input: string): MulProducts {
+export function solve (input: string): [number, number] {
   let all = 0
   let enabled = 0
   let doMul = true
@@ -36,5 +31,5 @@ export function solve (input: string): MulProducts {
     index = result.index
   }
 
-  return ({ all: all, enabled: enabled })
+  return [all, enabled]
 }

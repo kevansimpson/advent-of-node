@@ -8,12 +8,7 @@ import { Arrow, Point, manhattanDistance, move, samePoint, toKey, turnLeft, turn
 import { PointSet } from "../helpers/set"
 import { PriorityQueue } from "priority-queue-typescript"
 
-export type ReindeerMaze = {
-  steps: number,
-  seats: number
-}
-
-export function solve(input: string[], debug?: boolean): ReindeerMaze {
+export function solve(input: string[], debug?: boolean): [number, number] {
   const maze = new Maze(input)
   const visited = new DirPointMap()
   const begin = new DirPoint('>', maze.start)
@@ -64,7 +59,7 @@ export function solve(input: string[], debug?: boolean): ReindeerMaze {
   if (debug)
     maze.displayPath(solutions[0])
 
-  return { steps: minScore, seats: placesToSit(solutions) }
+  return [minScore, placesToSit(solutions)]
 }
 
 function canTurn(turn: DirPoint, maze: Maze, visited: DirPointMap, score: number): boolean {

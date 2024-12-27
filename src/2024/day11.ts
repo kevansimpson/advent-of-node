@@ -4,12 +4,7 @@
 
 import { toString } from "lodash"
 
-export type Stones = {
-    blinks25: number,
-    blinks75: number
-}
-
-export function solve (input: string): Stones {
+export function solve (input: string): [number, number] {
   const nums = input.split(' ').map(n => Number(n))
   let counter: Map<number, number> = new Map()
   nums.forEach(mark => {
@@ -28,7 +23,7 @@ export function solve (input: string): Stones {
   for (let [_, mark] of counter)
     blinks75 += mark;
 
-  return ({ blinks25: blinks25, blinks75: blinks75 })
+  return [blinks25, blinks75]
 }
 
 function blink(stones: Map<number, number>): Map<number, number> {

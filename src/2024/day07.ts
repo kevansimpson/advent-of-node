@@ -4,18 +4,12 @@
 
 import { extractNumbers } from '../helpers/util'
 
-export type RopeBridge = {
-  calibration: number,
-  concatenation: number
-}
-
 type Operation = ((a: number, b: number) => number)
-
 
 const ADD_MULTIPLY: Operation[] = [(a: number, b: number) => a + b, (a: number, b: number) => a * b]
 const WITH_CONCAT: Operation[] = [...ADD_MULTIPLY, (a: number, b: number) => Number(`${a}${b}`)]
 
-export function solve (input: string[]): RopeBridge {
+export function solve (input: string[]): [number, number] {
   let calibration = 0
   let concatenation = 0
   input.forEach( equation => {
@@ -26,7 +20,7 @@ export function solve (input: string[]): RopeBridge {
       concatenation += values[0]
   })
   concatenation += calibration
-  return ({ calibration: calibration, concatenation: concatenation })
+  return [calibration, concatenation]
 }
 
 function canBeCalibrated(values: number[], operations: Operation[]): boolean {

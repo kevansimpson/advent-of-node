@@ -6,16 +6,11 @@ import { Point } from "../helpers/point"
 import { PointSet } from "../helpers/set"
 import { extractNumbers } from '../helpers/util'
 
-export type RobotGuards = {
-  safetyFactor: number,
-  tree: number
-}
-
-export function solve(input: string[], width: number, height: number, debug?: boolean): RobotGuards {
+export function solve(input: string[], width: number, height: number, debug?: boolean): [number, number] {
   const bots = findRobots(input)
   bots.forEach(bot => bot.move(100, width, height))
 
-  return ({ safetyFactor: safetyFactor(bots, width, height), tree: findTree(bots, width, height, debug) })
+  return [safetyFactor(bots, width, height), findTree(bots, width, height, debug)]
 }
 
 function findTree(bots: Robot[], width: number, height: number, debug?: boolean): number {

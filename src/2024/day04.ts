@@ -4,16 +4,11 @@
 
 import { inGrid, moveXY, toKey, Point } from "../helpers/point"
 
-export type XmasCounts = {
-    xmas: number,
-    masCross: number
-}
-
 const XMAS = "XMAS"
 const DX = [0, 1, 1, 1, 0, -1, -1, -1]
 const DY = [-1, -1, 0, 1, 1, 1, 0, -1]
 
-export function solve (input: string[]): XmasCounts {
+export function solve (input: string[]): [number, number] {
   let xmas = 0
   const xCandidates: Point[] = []
   const mCandidates: Point[] = []
@@ -40,7 +35,7 @@ export function solve (input: string[]): XmasCounts {
       gridMas.isXmas(pt, 1, DX[i], DY[i])
   })
 
-  return ({ xmas: xmas, masCross: gridMas.crossCount })
+  return [xmas, gridMas.crossCount]
 }
 
 class XmasGrid {

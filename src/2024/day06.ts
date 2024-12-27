@@ -5,16 +5,11 @@
 import { Point, ORIGIN, move, Arrow, toKey } from "../helpers/point"
 import { PointSet, SetWithContentEquality } from "../helpers/set"
 
-export type GuardSteps = {
-    unique: number,
-    loops: number
-}
-
-export function solve (input: string[]): GuardSteps {
+export function solve (input: string[]): [number, number] {
   const lab = createLab(input)
   const path = lab.followGuard()
 
-  return ({ unique: path.path.size, loops: lab.findLoops(path.path) })
+  return [path.path.size, lab.findLoops(path.path)]
 }
 
 function createLab(input: string[]): Lab {

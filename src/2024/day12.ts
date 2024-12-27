@@ -5,12 +5,7 @@
 import { cardinal, inGrid, Point } from "../helpers/point"
 import { PointSet } from "../helpers/set"
 
-export type Gardens = {
-    perimeter: number,
-    sides: number
-}
-
-export function solve (input: string[]): Gardens {
+export function solve (input: string[]): [number, number] {
   const size = input.length
   let perimeter = 0
   let sides = 0
@@ -29,7 +24,7 @@ export function solve (input: string[]): Gardens {
     }
   }
 
-  return ({ perimeter: perimeter, sides: sides })
+  return [perimeter, sides]
 }
 
 function regionCost(region: Region, size: number): number {

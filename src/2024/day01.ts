@@ -2,17 +2,12 @@
  * @module 2024_day01
  */
 
-export type DiffScore = {
-    diff: number,
-    score: number
-}
-
 type Pair = {
     left: number,
     right: number
 }
 
-export function solve (input: string[]): DiffScore {
+export function solve (input: string[]): [number, number] {
   let diff = 0
   let score = 0
   const list: Pair[] = input.map((str) => str.split('   '))
@@ -26,7 +21,7 @@ export function solve (input: string[]): DiffScore {
     score += left[i] * (counts.get(left[i]) || 0)
   }
 
-  return ({ diff: diff, score: score })
+  return [diff, score]
 }
 
 function toMap(right: number[]): Map<number, number> {

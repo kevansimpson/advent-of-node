@@ -2,12 +2,7 @@
  * @module 2024_day19
  */
 
-export type DesignCounts = {
-  possible: number,
-  totalCombos: number
-}
-
-export function solve(input: string[]): DesignCounts {
+export function solve(input: string[]): [number, number] {
   const patterns = new Set(input[0].split(', '))
   const desired = input.slice(2)
   const cache = new Map<string, number>()
@@ -21,7 +16,7 @@ export function solve(input: string[]): DesignCounts {
     totalCombos += c
   })
 
-  return { possible: possible, totalCombos: totalCombos }
+  return [possible, totalCombos]
 }
 
 function countPossibleDesigns(design: string, patterns: Set<string>, cache: Map<string, number>): number {

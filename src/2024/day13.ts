@@ -5,12 +5,7 @@
 import { Point } from "../helpers/point"
 import { extractNumbers } from '../helpers/util'
 
-export type GameResults = {
-    near: number,
-    far: number
-}
-
-export function solve (input: string[]): GameResults {
+export function solve (input: string[]): [number, number] {
   let near = 0
   let far = 0
   installMachines(input).forEach(m => {
@@ -18,7 +13,7 @@ export function solve (input: string[]): GameResults {
     far += playCramersRule(m.further())
   })
 
-  return ({ near: near, far: far })
+  return [near, far]
 }
 
 
