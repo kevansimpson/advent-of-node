@@ -22,6 +22,7 @@ import { runProgram, lowestRegisterA } from '../src/2024/day17'
 import { solve as day18 } from '../src/2024/day18'
 import { solve as day19 } from '../src/2024/day19'
 import { solve as day20 } from '../src/2024/day20'
+import { solve as day21 } from '../src/2024/day21'
 
 describe('2024 answers', () => {
   it('Day01: list distances', async () => {
@@ -133,5 +134,10 @@ describe('2024 answers', () => {
   it('Day20: race condition', async () => {
     const result = day20(readLines(path.join(__dirname, './resources/2024/input20.txt')))
     assert.deepStrictEqual(result, [1454, 997879])
+  })
+
+  it('Day21: keypad conundrum', async () => {
+    const result = day21(['935A', '319A', '480A', '789A', '176A'])
+    assert.deepStrictEqual(result, [188398, 230049027535970])
   })
 })
