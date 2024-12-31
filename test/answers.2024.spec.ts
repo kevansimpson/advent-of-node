@@ -1,7 +1,7 @@
 import assert from 'assert'
 import 'mocha'
 import path from 'path'
-import { readLines, readString } from '../src/helpers/input'
+import { readLines, readNumbers, readString } from '../src/helpers/input'
 import { solve as day01 } from '../src/2024/day01'
 import { solve as day02 } from '../src/2024/day02'
 import { solve as day03 } from '../src/2024/day03'
@@ -23,6 +23,7 @@ import { solve as day18 } from '../src/2024/day18'
 import { solve as day19 } from '../src/2024/day19'
 import { solve as day20 } from '../src/2024/day20'
 import { solve as day21 } from '../src/2024/day21'
+import { solve as day22 } from '../src/2024/day22'
 
 describe('2024 answers', () => {
   it('Day01: list distances', async () => {
@@ -140,4 +141,9 @@ describe('2024 answers', () => {
     const result = day21(['935A', '319A', '480A', '789A', '176A'])
     assert.deepStrictEqual(result, [188398, 230049027535970])
   })
+
+  it('Day22: monkey market', async () => {
+    const result = await day22(readNumbers(path.join(__dirname, './resources/2024/input22.txt')))
+    assert.deepStrictEqual(result, [BigInt(14082561342), 1568])
+  }).timeout(50000)
 })
