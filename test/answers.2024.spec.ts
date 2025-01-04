@@ -26,6 +26,7 @@ import { solve as day21 } from '../src/2024/day21'
 import { solve as day22 } from '../src/2024/day22'
 import { solve as day23 } from '../src/2024/day23'
 import { solve as day24 } from '../src/2024/day24'
+import { solve as day25 } from '../src/2024/day25'
 
 describe('2024 answers', () => {
   it('Day01: list distances', async () => {
@@ -157,5 +158,10 @@ describe('2024 answers', () => {
   it('Day24: crossed wires', async () => {
     const result = day24(readLines(path.join(__dirname, './resources/2024/input24.txt')))
     assert.deepStrictEqual(result, [57588078076750, 'kcd,pfn,shj,tpk,wkb,z07,z23,z27'])
+  })
+
+  it('Day25: code chronicle', async () => {
+    const result = day25(readLines(path.join(__dirname, './resources/2024/input25.txt')))
+    assert.strictEqual(result, 3021)
   })
 })
